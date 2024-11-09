@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR_form_exercise</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        <fieldset style="width: 700px; background-color: rgb(214, 213, 213);">
+            <h3 style="margin: 0px;">Testform</h3>
+        </fieldset>
+        <fieldset style="width: 700px;">
+            <label for="name" style="display: inline-block; width: 150px;">Name</label>
+            <input type="text" name="name" id="name"><br><br>
+            <label for="password" style="display: inline-block; width: 150px;">Password</label>
+            <input type="password" name="password" id="password"><br><br>
+            <label for="genre" style="display: inline-block; width: 150px;">Genre</label>
+            <input type="radio" name="genre" id="male" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" name="genre" id="female" value="female" style="margin-left: 159px;">
+            <label for="female">Female</label><br><br>
+            <label for="continent" style="display: inline-block; width: 150px;">Continent</label>
+            <select name="continent" id="continent" required>
+                <option value="" hidden>Please select</option>
+                <option value="europe">Europe</option>
+                <option value="north america">North america</option>
+                <option value="south america">South america</option>
+                <option value="africa">Africa</option>
+                <option value="australia">Australia</option>
+                <option value="asia">Asia</option>
+                <option value="antartic">Antartic</option>
+            </select><br><br>
+            <label for="meals" style="display: inline-block; width: 150px;">Meals</label>
+            <input type="checkbox" name="meals" id="breakfast" value="breakfast">
+            <label for="breakfast">breakfast</label><br>
+            <input type="checkbox" name="meals" id="lunch" value="lunch" style="margin-left: 158px;">
+            <label for="lunch">lunch</label><br>
+            <input type="checkbox" name="meals" id="dinner" value="dinner" style="margin-left: 158px;">
+            <label for="dinner">dinner</label><br><br>
+            <label for="remark" style="display: inline-block; width: 150px; vertical-align: top;">Remark</label>
+            <textarea id="remark" name="remark" cols="50" rows="5"></textarea><br><br>
+        </fieldset>
+        <fieldset style="width: 700px; background-color: rgb(214, 213, 213);">
+            <input type="submit" value="Send" style="margin-left: 600px;">
+            <input type="reset" value="Cancel">
+        </fieldset>
+    </form>
+
+</body>
+
+</html>
