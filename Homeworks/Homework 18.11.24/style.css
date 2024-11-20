@@ -8,8 +8,7 @@ p{
     background-color: rgb(255, 255, 90);
 }
 li{
-    border: solid 1px; 
-    border-color: rgba(0, 0, 0, 1);
+    border: solid 1px rgba(0, 0, 0, 1); 
     margin: 5px;
 }
 input{
