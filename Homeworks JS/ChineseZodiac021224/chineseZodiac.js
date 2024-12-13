@@ -1,11 +1,12 @@
 let answerButton = document.getElementById("answerButton");
 answerButton.addEventListener("click", answerFunc);
 function answerFunc() {
-    let answer = document.querySelector('input[name="answer"]:checked').value;
-    if (answer == "Yes") {
+    let isYesChecked = document.getElementById("yesOption").checked;
+    let isNoChecked = document.getElementById("noOption").checked;
+    if (isYesChecked) {
         askBirthYear();
     }
-    if (answer == "No") {
+    if (isNoChecked) {
         alert("Ok. Take yor time, think a lot.")
     }
 }
