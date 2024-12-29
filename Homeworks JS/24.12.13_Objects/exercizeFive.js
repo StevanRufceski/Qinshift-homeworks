@@ -1,7 +1,5 @@
-listOfStudents = [];
+console.log("connected");
 
-let saveButton = document.getElementById("saveButton");
-saveButton.addEventListener("click", saveStudentFunc);
 function saveStudentFunc(){
     let newStudentName = document.getElementById("name").value;
     let newStudentSurname = document.getElementById("surname").value;
@@ -11,18 +9,24 @@ function saveStudentFunc(){
         surname: newStudentSurname,
         age: newStudentAge,
     }
-    // console.log(newStudent)
     addStudentFunc(newStudent);
+    clearInputs();
     return newStudent;
 }
 function addStudentFunc(newStudent){
-    // console.log(newStudent);
     listOfStudents.push(newStudent);
-    console.log(listOfStudents);
-
-
+    document.getElementsByTagName("ul")[0].innerHTML += `<li>Name: ${newStudent.name} ${newStudent.surname} Age: ${newStudent.age}</li>`;
+}
+function clearInputs(){
+    document.getElementById("name").value="";
+    document.getElementById("surname").value="";
+    document.getElementById("age").value="";
 }
 
+listOfStudents = [];
+
+let saveButton = document.getElementById("saveButton");
+saveButton.addEventListener("click", saveStudentFunc);
 
 
 
