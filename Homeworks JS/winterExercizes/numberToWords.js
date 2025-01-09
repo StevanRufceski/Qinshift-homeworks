@@ -38,38 +38,7 @@ convert.addEventListener("click", function(){
   }
 })
 
-    // if ((numberOne === "")&&(document.getElementById("displayDown").innerText !== "")) {
-    //     numberOne = Number(document.getElementById("displayDown").innerText);
-    //     operatorOne = String(document.getElementById("covert").innerText);
-    //     document.getElementById("displayUpOne").innerText = numberOne;
-    //     document.getElementById("displayUpTwo").innerText = document.getElementById("covert").innerText;
-    //     document.getElementById("displayDown").innerText = ""
-    // } else if ((numberOne !== "")&&(document.getElementById("displayDown").innerText !== "")){
-    //     numberTwo = Number(document.getElementById("displayDown").innerText);
-    //     operatorTwo = String(document.getElementById("covert").innerText);
-    //     switch (operatorOne) {
-    //         case "+":
-    //             result = numberOne + numberTwo;
-    //             break;
-    //         case "-":
-    //             result = numberOne - numberTwo;
-    //             break;
-    //         case "*":
-    //             result = numberOne * numberTwo;
-    //             break;
-    //         case "/":
-    //             result = numberOne / numberTwo;
-    //             break;
-    //     }
-    //     operatorOne = operatorTwo;
-    //     numberOne = result;
-    //     document.getElementById("displayUpOne").innerText = numberOne;
-    //     document.getElementById("displayUpTwo").innerText = document.getElementById("covert").innerText;
-    //     document.getElementById("displayDown").innerText = ""
-    // } else if ((numberOne !== "")&&(document.getElementById("displayDown").innerText === "")){
-    //     operatorOne = String(document.getElementById("covert").innerText);
-    //     document.getElementById("displayUpTwo").innerText = document.getElementById("covert").innerText;
-    // }
+
 
 
 
