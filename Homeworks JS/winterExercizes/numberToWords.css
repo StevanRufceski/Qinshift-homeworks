@@ -1,8 +1,7 @@
 .grid-container {
     display: grid;
-    width: 400px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    width: 600px;
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     border: solid rgba(red, 0, blue, alpha)
 }
@@ -12,19 +11,21 @@
     padding: 20px;
     text-align: center;
 }
-#displayUp {
-    grid-column-start: 1;
-    grid-column-end: 5;
+#displayWords {
+    grid-column-start: 3;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 3;
     text-align: end;
 }
-#displayDown {
+#inputNumber {
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 3;
     text-align: end;
 }
 #convert {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 7;
 }
 button:hover{
     cursor: pointer;
