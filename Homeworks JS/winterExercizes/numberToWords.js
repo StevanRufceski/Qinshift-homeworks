@@ -27,11 +27,14 @@ inputBox.addEventListener("keydown", function(e) {
     e.preventDefault();
   }
 });
+
 // ------------ PROCESSING NUMBER ---------
 
 let convert = document.getElementById("convert");
 convert.addEventListener("click", function(){
     let number = document.getElementById("displayDown").value;
+    alert(inputBox.value[0])
+
 
     // if ((numberOne === "")&&(document.getElementById("displayDown").innerText !== "")) {
     //     numberOne = Number(document.getElementById("displayDown").innerText);
