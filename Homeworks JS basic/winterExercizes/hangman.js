@@ -131,10 +131,6 @@ let musicNames = [`WELL COME TO THE JUNGLE`, `RIDERS ON THE STORM`, `ONE MORE CU
 let randomTitleName
 let randomTitle
 
-
-
-
-
 let subjectBtn = document.getElementById(`subjectBtn`);
 subjectBtn.addEventListener("click", function() {
     if (document.getElementById('film').checked) {
