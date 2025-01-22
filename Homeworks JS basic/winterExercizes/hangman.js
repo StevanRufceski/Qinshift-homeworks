@@ -37,16 +37,18 @@ function finishTheGame(){
         }
     }
 }
-function startNewGame(){
-// -------- draw alhpabet buttons -----------
-    for (let i = 65; i <= 90; i++) {
-        let letterBtn = document.createElement('button');
-        let letter = String.fromCharCode(i);
-        letterBtn.textContent = letter;
-        letterBtn.className = 'letterBtn';
-        letterBtn.disabled = false;
-        document.getElementsByTagName(`h3`)[0].appendChild(letterBtn);
+function setupNewGame(){
+    // -------- draw alhpabet buttons -----------
+        for (let i = 65; i <= 90; i++) {
+            let letterBtn = document.createElement('button');
+            let letter = String.fromCharCode(i);
+            letterBtn.textContent = letter;
+            letterBtn.className = 'letterBtn';
+            letterBtn.disabled = false;
+            document.getElementsByTagName(`h3`)[0].appendChild(letterBtn);
+        }
     }
+function startNewGame(){
     for (let i = 0; i < randomTitleName.length; i++) {
         let letterSpace = document.createElement('div');
         document.getElementById(`titleName`).appendChild(letterSpace);
@@ -126,8 +128,6 @@ function guessLetter(theLetter){
     // ------- select random title name ------------
 let filmNames = [`LOCK STOCK AND TWO SMOKING BARRELS`, `SNATCH`, `THE GOOD THE BAD AND THE UGLY`, `THE LION KING`];
 let musicNames = [`WELL COME TO THE JUNGLE`, `RIDERS ON THE STORM`, `ONE MORE CUP OF COFFEE`, `POKVARENA MASTA I PRLJAVE STRASTI`];
-// let randomTitle = Math.floor(Math.random()*filmNames.length);
-// let randomTitleName = filmNames[randomTitle]
 let randomTitleName
 let randomTitle
 
@@ -151,6 +151,7 @@ subjectBtn.addEventListener("click", function() {
     // ------ start the game --------
 
 // startNewGame();
+setupNewGame()
 
 
 let startBtn = document.getElementById(`startBtn`);
