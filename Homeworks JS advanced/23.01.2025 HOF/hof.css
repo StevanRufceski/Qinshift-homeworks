@@ -4,11 +4,15 @@ body{
 table, tr, th, td{
     border: solid 1px black;
 }
-table {
+table, div {
     display: none;
     width: fit-content;
     justify-self: center;
 }
 td {
     min-width: 150px;
+}
+#filterFourthValue {
+    font-size:xx-large;
+    color:brown
 }

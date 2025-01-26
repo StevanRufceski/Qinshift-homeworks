@@ -40,38 +40,44 @@ function printFilteredStudents(filteredStudents, filter){
 // 3------- filter all students ---------
 function filterStudents(students, filter){
     sortedStudents = students.sort((a, b) => a.firstName.localeCompare(b.firstName));
-    if (filter === "firstFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if (element.averageGrade > 3) {
-                return element
-            }
-        });
-    }else if (filter === "secondFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.averageGrade === 5)&&(element.gender === "Female")) {
-                return element
-            }
-        });
-    }else if (filter === "thirdFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.city === "Skopje")&&(element.gender === "Male")&&(element.age > 18)) {
-                return element
-            }
-        });
-    }else if (filter === "fourthFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.age > 24)&&(element.gender === "Female")) {
-                return element
-            }
-        });
-    }else if (filter === "fifthFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.firstName[0] === "B")&&(element.gender === "Male")&&(element.averageGrade > 2)) {
-                return element
-            }
-        });
-    }else {
-        filteredStudents = sortedStudents;
+    switch (filter) {
+        case `firstFilter`:
+            filteredStudents = sortedStudents.filter((element) => {
+                if (element.averageGrade > 3) {
+                    return element
+                }
+            });
+            break;
+        case `secondFilter`:
+            filteredStudents = sortedStudents.filter((element) => {
+                if ((element.averageGrade === 5)&&(element.gender === "Female")) {
+                    return element
+                }
+            });
+            break;
+        case `thirdFilter`:
+            filteredStudents = sortedStudents.filter((element) => {
+                if ((element.city === "Skopje")&&(element.gender === "Male")&&(element.age > 18)) {
+                    return element
+                }
+            });
+            break;
+        case `fourthFilter`:
+            filteredStudents = sortedStudents.filter((element) => {
+                if ((element.age > 24)&&(element.gender === "Female")) {
+                    return element
+                }
+            });
+            break;
+        case `fifthFilter`:
+            filteredStudents = sortedStudents.filter((element) => {
+                if ((element.firstName[0] === "B")&&(element.gender === "Male")&&(element.averageGrade > 2)) {
+                    return element
+                }
+            });
+            break;
+        default:
+            filteredStudents = sortedStudents;
     }
     printFilteredStudents(filteredStudents, filter);
 }

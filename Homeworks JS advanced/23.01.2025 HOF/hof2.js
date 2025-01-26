@@ -1,3 +1,45 @@
+// -------------filtering functions ----------
+function firstFilter(sortedStudents, filter){
+    filteredStudents = sortedStudents.filter((element) => {
+        if (element.averageGrade > 3) {
+            return element
+        }
+    });
+    printFilteredStudents(filteredStudents, filter);
+}
+function secondFilter(sortedStudents, filter){
+    filteredStudents = sortedStudents.filter((element) => {
+        if ((element.averageGrade === 5)&&(element.gender === "Female")) {
+            return element
+        }
+    });
+    printFilteredStudents(filteredStudents, filter);
+}
+function thirdFilter(sortedStudents, filter){
+    filteredStudents = sortedStudents.filter((element) => {
+        if ((element.city === "Skopje")&&(element.gender === "Male")&&(element.age > 18)) {
+            return element
+        }
+    });
+    printFilteredStudents(filteredStudents, filter);
+}
+function fourthFilter(sortedStudents, filter){
+    filteredStudents = sortedStudents.filter((element) => {
+        if ((element.age > 24)&&(element.gender === "Female")) {
+            return element
+        }
+    });
+    printFilteredStudents(filteredStudents, filter);
+}
+function fifthFilter(sortedStudents, filter){
+    filteredStudents = sortedStudents.filter((element) => {
+        if ((element.firstName[0] === "B")&&(element.gender === "Male")&&(element.averageGrade > 2)) {
+            return element
+        }
+    });
+    printFilteredStudents(filteredStudents, filter);
+}
+
 // 4---------- print filtered students ----------
 function printFilteredStudents(filteredStudents, filter){
     document.getElementsByTagName(`table`)[0].style.display = `block`;
@@ -40,40 +82,26 @@ function printFilteredStudents(filteredStudents, filter){
 // 3------- filter all students ---------
 function filterStudents(students, filter){
     sortedStudents = students.sort((a, b) => a.firstName.localeCompare(b.firstName));
-    if (filter === "firstFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if (element.averageGrade > 3) {
-                return element
-            }
-        });
-    }else if (filter === "secondFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.averageGrade === 5)&&(element.gender === "Female")) {
-                return element
-            }
-        });
-    }else if (filter === "thirdFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.city === "Skopje")&&(element.gender === "Male")&&(element.age > 18)) {
-                return element
-            }
-        });
-    }else if (filter === "fourthFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.age > 24)&&(element.gender === "Female")) {
-                return element
-            }
-        });
-    }else if (filter === "fifthFilter") {
-        filteredStudents = sortedStudents.filter((element) => {
-            if ((element.firstName[0] === "B")&&(element.gender === "Male")&&(element.averageGrade > 2)) {
-                return element
-            }
-        });
-    }else {
-        filteredStudents = sortedStudents;
+    switch (filter) {
+        case `firstFilter`:
+            firstFilter(sortedStudents, filter);
+            break;
+        case `secondFilter`:
+            secondFilter(sortedStudents, filter);
+            break;
+        case `thirdFilter`:
+            thirdFilter(sortedStudents, filter);
+            break;
+        case `fourthFilter`:
+            fourthFilter(sortedStudents, filter);
+            break;
+        case `fifthFilter`:
+            fifthFilter(sortedStudents, filter);
+            break;
+        default:
+            // filteredStudents = sortedStudents;
+            printFilteredStudents(sortedStudents, filter);
     }
-    printFilteredStudents(filteredStudents, filter);
 }
 
 // 2----- API call and get the list of students --------
