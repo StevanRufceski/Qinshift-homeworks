@@ -1,7 +1,18 @@
-table, tr, th, td{
-    border: solid 1px black;
+body {
+    justify-items: center;
 }
 table {
     display: none;
     width: fit-content;
 }
+caption{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+tr, th, td{
+    border: solid 1px black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
