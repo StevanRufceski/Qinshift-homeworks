@@ -1,0 +1,1 @@
+Celioto predavanje se kreira aplikacijata za Weather forecast
