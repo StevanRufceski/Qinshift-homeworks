@@ -43,6 +43,13 @@ app.delete('/books/:id', async (req, res) => {
     res.sendStatus(204);
 });
 // advanced requirements
+// get all books
+app.get('/books/all', async (req, res) => {
+    const books = await fs.readFile(BOOKS_FILE_PATH, 'utf-8');
+    const parsedBooks = JSON.parse(books);
+    console.log(parsedBooks);
+    res.json(parsedBooks);
+});
 // search book
 app.get('/books', async (req, res) => {
     const {year, author} = req.query;
@@ -52,10 +59,7 @@ app.get('/books', async (req, res) => {
     let filteredBooks = [];
 
     if (author) {
-        filteredBooks = parsedBooks.filter(book => book.author === author);
-    }
-    if (year) {
-        filteredBooks = filteredBooks.filter(book => book.year === year);
+        filteredBooks = parsedBooks.filter(book => ((book.author === author)&&(book.year === year)));
     }
     res.json(filteredBooks);
 });
