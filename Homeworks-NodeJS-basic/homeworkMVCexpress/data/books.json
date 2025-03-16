@@ -57,5 +57,12 @@
     "year": "2023",
     "id": 11,
     "createdAt": "2025-03-14T11:44:04.008Z"
+  },
+  {
+    "title": "A Book Title",
+    "author": "Author Surname",
+    "year": "1960",
+    "id": 12,
+    "createdAt": "2025-03-16T13:37:22.292Z"
   }
 ]

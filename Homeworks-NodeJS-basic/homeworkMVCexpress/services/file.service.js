@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import { dirname, join} from 'path';
 import { fileURLToPath } from 'url';
 
-//parametri za da gi koristi index.js
+//parametri za da gi koristi index.js vo integracijata so middleware
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 export const filePath = fileName => join(__dirname, `../data/${fileName}`);
 
