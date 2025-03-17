@@ -1,68 +1,23 @@
 [
   {
-    "title": "New Book Title",
-    "author": "Author Name",
-    "year": "1950",
-    "id": 8
+    "genre": "Fantasy",
+    "reviews": [],
+    "id": 1,
+    "createdAt": "2025-03-17T12:24:05.258Z"
   },
   {
-    "title": "Title Two",
-    "author": "Author Two",
-    "year": "1952",
-    "id": 10
+    "genre": "Comedy",
+    "reviews": [],
+    "id": 2,
+    "createdAt": "2025-03-17T12:24:36.528Z"
   },
   {
-    "title": "Title Two",
-    "author": "Author Two",
-    "year": "1952",
-    "id": 5
-  },
-  {
-    "title": "Title Two",
-    "author": "Stevan Rufceski",
-    "year": "2025",
-    "id": 6
-  },
-  {
-    "title": "Title Five",
-    "author": "Stevan Rufceski",
-    "year": "2022",
-    "id": 5
-  },
-  {
-    "title": "Title Five",
-    "author": "Stevan Stevan",
-    "year": "2022",
-    "id": 6
-  },
-  {
-    "id": 7,
-    "createdAt": "2025-03-14T11:36:20.726Z"
-  },
-  {
-    "id": 8,
-    "createdAt": "2025-03-14T11:39:15.945Z"
-  },
-  {
-    "id": 9,
-    "createdAt": "2025-03-14T11:39:44.249Z"
-  },
-  {
-    "id": 10,
-    "createdAt": "2025-03-14T11:41:40.924Z"
-  },
-  {
-    "title": "Title Fifteen",
-    "author": "Tony Tony",
-    "year": "2023",
-    "id": 11,
-    "createdAt": "2025-03-14T11:44:04.008Z"
-  },
-  {
-    "title": "A Book Title",
-    "author": "Author Surname",
-    "year": "1960",
-    "id": 12,
-    "createdAt": "2025-03-16T13:37:22.292Z"
+    "title": "Book One",
+    "author": "Tony Soprano",
+    "year": "2009",
+    "genre": "Comedy",
+    "reviews": [],
+    "id": 3,
+    "createdAt": "2025-03-17T12:25:05.173Z"
   }
 ]
