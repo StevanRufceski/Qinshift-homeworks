@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 const MONGO_USERNAME = 'stevanrufceski';
-const MONGO_PASSWORD = 'Gbius2025';
+const MONGO_PASSWORD = 'stevanrufceski';
 const MONGO_CLUSTER = 'cluster0.qove7';
 const MONGO_DB_NAME = 'tasks-app';
 

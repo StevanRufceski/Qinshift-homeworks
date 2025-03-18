@@ -19,5 +19,21 @@
     "reviews": [],
     "id": 3,
     "createdAt": "2025-03-17T12:25:05.173Z"
+  },
+  {
+    "title": "A New Book Title",
+    "author": "Author Surname",
+    "year": "1962",
+    "reviews": [],
+    "id": 4,
+    "createdAt": "2025-03-18T20:13:28.517Z"
+  },
+  {
+    "title": "A Extra Book Title",
+    "author": "Author Surname",
+    "year": "1963",
+    "reviews": [],
+    "id": 5,
+    "createdAt": "2025-03-18T20:13:52.381Z"
   }
 ]

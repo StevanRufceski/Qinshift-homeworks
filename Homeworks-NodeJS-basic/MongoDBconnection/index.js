@@ -1,7 +1,5 @@
 import express from 'express';
 
-import { connectDB } from './config/db.js';
-
 const PORT = 3000;
 const HOSTNAME = 'localhost';
 
@@ -12,6 +10,7 @@ app.use(express.json())
 import taskRouter from "./routes/tasks.routes.js"
 app.use('/api/tasks', taskRouter)
 // -----
+import { connectDB } from './config/db.js';
 
 async function startServer() {
     try {

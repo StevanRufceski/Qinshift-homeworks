@@ -9,7 +9,7 @@ const HOSTNAME = 'localhost';
 
 app.use(express.json());
 
-app.use('', bookRouter);   // treba megju praznite '' da stoi /api/books koga se raboti so public frontend
+app.use('/api/books', bookRouter);   // treba megju praznite '' da stoi /api/books koga se raboti so public frontend
 
 app.listen(PORT, HOSTNAME, () => {
 	console.log(`Server started listening on: http://${HOSTNAME}:${PORT}`);
