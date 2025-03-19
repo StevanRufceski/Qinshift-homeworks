@@ -1,33 +1,38 @@
 import {filePath, readFile, writeFile} from '../services/file.service.js';
 
-const Book = {
+const BookModel = {
     async getAllBooks() {
         const books = await readFile('books.json');
         return books;
     },
 
-    async getBookByAuthorYear(author, year) {
+    async getBooksByAuthorYear(author, year) {
         const books = await readFile('books.json');
         const filteredBooks = books.filter(book => ((book.author === author)&&(book.year === year)));
         return filteredBooks;
     },
 
     async createBook(body) {
-        const books = await readFile('books.json');
-        const newBook = {
-            ...body,
-            reviews: [],
-            id: books.length + 1,
-            createdAt: new Date().toISOString(),
-        };
-        books.push(newBook);
-        await writeFile('books.json', books);
-        return newBook;
+        if ((body.title) && (body.author) && (body.year)) {
+            const books = await readFile('books.json');
+            const newBook = {
+                ...body,
+                reviews: [],
+                id: books.length + 1,
+                createdAt: new Date().toISOString(),
+            };
+            books.push(newBook);
+            await writeFile('books.json', books);
+            return newBook;
+        }
+        
     },
     async deleteBook(id) {
         const books = await readFile('books.json');
+        const bookToDelete = books.find(book => book.id === parseInt(id));
         const filteredBooks = books.filter(book => book.id !== parseInt(id));
         await writeFile('books.json', filteredBooks);
+        return bookToDelete
     },
     async booksStats() {
         const books = await readFile('books.json');
@@ -52,28 +57,39 @@ const Book = {
     },
     async getBookById(id) {
         const books = await readFile('books.json');
-        const filteredBooks = books.filter(book => book.id === parseInt(id));
-        return filteredBooks;
+        const book = books.find(book => book.id === parseInt(id));
+        return book;
     },
     async updateBookById(id, body) {
         const books = await readFile('books.json');
         const bookToUpdate = books.find(book => book.id === parseInt(id))
-        bookToUpdate.title = body.title;
-        bookToUpdate.author = body.author;
-        bookToUpdate.year = body.year
-        await writeFile('books.json', books);
+        if (bookToUpdate) {
+            if (body.title){
+                bookToUpdate.title = body.title;
+            }
+            if (body.author){
+                bookToUpdate.author = body.author;
+            }
+            if (body.year){
+                bookToUpdate.year = body.year;
+            }
+            if (body.genre){
+                bookToUpdate.genre = body.genre;
+            }
+            await writeFile('books.json', books);
+		}
         return bookToUpdate;
     },
     async reviewBookById(id, body) {
         const books = await readFile('books.json');
-        const bookToUpdate = books.find(book => book.id === parseInt(id))
-        const review = JSON.parse(body)
-        bookToUpdate.reviews.push(review);
-        // bookToUpdate.reviews.push(body);
-        await writeFile('books.json', books);
-        return bookToUpdate;
+        const bookToReview = books.find(book => book.id === parseInt(id))
+        if (bookToReview){
+            bookToReview.reviews.push(body);
+            await writeFile('books.json', books);
+        }
+        return bookToReview;
     },
     
 };
 
-export default Book;
+export default BookModel;

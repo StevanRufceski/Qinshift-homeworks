@@ -1,30 +1,43 @@
-import Book from '../models/books.model.js'
+import BookModel from '../models/books.model.js'
 
 const BookController = {
 	async getAllBooks(req, res) {
-		const books = await Book.getAllBooks();
-		res.send(books);
-	},
-	async getBookByAuthorYear(req, res) {
-		const {year, author} = req.query;
-		const book = await Book.getBookByAuthorYear(author, year);
-		if (!book) {
+		const books = await BookModel.getAllBooks();
+		if (books.length > 0) {
+			res.send(books);
+		} else {
 			res.status(404).send({
-				error: 'There are not such books.',
+				error: 'The library is empty.',
 			});
 		}
-		res.send(book);
+	},
+	async getBooksByAuthorYear(req, res) {
+		const {year, author} = req.query;
+		const filteredBooks = await BookModel.getBooksByAuthorYear(author, year);
+		if (filteredBooks.length > 0) {
+			res.send(filteredBooks);
+		} else {
+			res.status(404).send({
+				error: 'There are no such books.',
+			});
+		}
 	},
 	async createBook(req, res) {
 		const { body } = req;
         console.log(body)
-		const book = await Book.createBook(body);
+		const book = await BookModel.createBook(body);
+		if (!book) {
+			res.status(404).send({
+				error: 'Can not create book without knowing title, author, and year.',
+			});
+		} 
 		res.status(201).send(book);
+		
 	},
 	async deleteBook(req, res) {
-		const {id} = req.query;
-		const book = await Book.deleteBook(id);
-		if (!book) {
+		const {id} = req.params;
+		const bookToDelete = await BookModel.deleteBook(id);
+		if (!bookToDelete) {
 			res.status(404).send({
 				error: 'There are not such book.',
 			});
@@ -32,12 +45,12 @@ const BookController = {
 		res.sendStatus(204);
 	},
 	async booksStats(req, res) {
-		const stats = await Book.booksStats();
+		const stats = await BookModel.booksStats();
 		res.send(stats);
 	},
 	async getBookById(req, res) {
 		const {id} = req.params;
-		const book = await Book.getBookById(id);
+		const book = await BookModel.getBookById(id);
 		if (!book) {
 			res.status(404).send({
 				error: 'There are not such book.',
@@ -48,13 +61,23 @@ const BookController = {
 	async updateBookById(req, res) {
 		const {id} = req.params;
 		const { body } = req;
-		const book = await Book.updateBookById(id, body);
+		const book = await BookModel.updateBookById(id, body);
+		if (!book) {
+			res.status(404).send({
+				error: 'There are not such book.',
+			});
+		}
 		res.status(201).send(book);
 	},
 	async reviewBookById(req, res) {
 		const {id} = req.params;
 		const { body } = req;
-		const book = await Book.updateBookById(id, body);
+		const book = await BookModel.reviewBookById(id, body);
+		if (!book) {
+			res.status(404).send({
+				error: 'There are not such book.',
+			});
+		}
 		res.status(201).send(book);
 	},
 };

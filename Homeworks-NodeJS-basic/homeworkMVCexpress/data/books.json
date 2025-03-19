@@ -1,39 +1,51 @@
 [
   {
-    "genre": "Fantasy",
-    "reviews": [],
-    "id": 1,
-    "createdAt": "2025-03-17T12:24:05.258Z"
-  },
-  {
+    "title": "Snatch - part 4",
+    "author": "Tony Tony",
+    "year": "2018",
     "genre": "Comedy",
-    "reviews": [],
-    "id": 2,
-    "createdAt": "2025-03-17T12:24:36.528Z"
+    "reviews": [
+      {
+        "rating": 5,
+        "comment": "Great book!",
+        "reviewer": "John Doe"
+      },
+      {
+        "rating": 4,
+        "comment": "Great book!",
+        "reviewer": "John Doe"
+      }
+    ],
+    "id": 1,
+    "createdAt": "2025-03-19T11:17:16.706Z"
   },
   {
-    "title": "Book One",
-    "author": "Tony Soprano",
-    "year": "2009",
+    "title": "Snatch - part 2",
+    "author": "Tony Tony",
+    "year": "2019",
+    "genre": "Comedy",
+    "reviews": [
+      {
+        "rating": 5,
+        "comment": "Great book!",
+        "reviewer": "John Doe"
+      },
+      {
+        "rating": 5,
+        "comment": "Great New book!",
+        "reviewer": "John Doe"
+      }
+    ],
+    "id": 2,
+    "createdAt": "2025-03-19T11:17:27.315Z"
+  },
+  {
+    "title": "Book A",
+    "author": "Stevan Rufceski",
+    "year": "2000",
     "genre": "Comedy",
     "reviews": [],
     "id": 3,
-    "createdAt": "2025-03-17T12:25:05.173Z"
-  },
-  {
-    "title": "A New Book Title",
-    "author": "Author Surname",
-    "year": "1962",
-    "reviews": [],
-    "id": 4,
-    "createdAt": "2025-03-18T20:13:28.517Z"
-  },
-  {
-    "title": "A Extra Book Title",
-    "author": "Author Surname",
-    "year": "1963",
-    "reviews": [],
-    "id": 5,
-    "createdAt": "2025-03-18T20:13:52.381Z"
+    "createdAt": "2025-03-19T11:51:15.330Z"
   }
 ]
