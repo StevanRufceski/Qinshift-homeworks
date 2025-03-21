@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { getDB } from "../config/db.config.js";
 
-const RecipeModel = {
+const RecipeService = {
     async getAllRecipes(){
         const recipes = await getDB().collection('recipes').find({}).toArray();
         return recipes
@@ -43,4 +43,4 @@ const RecipeModel = {
         return recipesByDifficulty
     },
 };
-export default RecipeModel
+export default RecipeService

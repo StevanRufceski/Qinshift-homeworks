@@ -9,7 +9,7 @@ app.use(express.json());
 import router from './routes/recipeRoutes.js'
 import { connectDB } from './config/db.config.js';
 
-app.use('/api/recipes', router);
+app.use('/api', router);
 
 async function startServer (){
     try{
