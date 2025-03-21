@@ -6,8 +6,17 @@ const RecipeController = {
         res.send(allRecipes)
     },
     async createRecipe (req, res){
-        const newRecipe = await RecipeModel.createRecipe(req.body)
-        res.send(newRecipe);
+        const { title, description, ingredients, cookingTime, difficulty, category } = req.body;
+        const newRecipe = new RecipeModel({
+            title,
+            description,
+            ingredients,
+            cookingTime,
+            difficulty,
+            category,
+        });
+        const createdRecipe = await RecipeModel.createRecipe(newRecipe)
+        res.send(createdRecipe);
     },
     async updateRecipe(req, res){
         const updatedRecipe = await RecipeModel.updateRecipe(req.params.id, req.body)
@@ -36,3 +45,4 @@ const RecipeController = {
     },
 };
 export default RecipeController;
+
