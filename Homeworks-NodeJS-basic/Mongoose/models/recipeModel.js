@@ -27,37 +27,14 @@ const recipeSchema = new mongoose.Schema({
     },
     isVegetarian: {
         type: Boolean,
+        // required: true,
     },
     category: {
         type: String,
+        required: true,
         enum: ['breakfast', 'lunch', 'dinner', 'dessert'],
     },
 });
-recipeSchema.statics.recipesByDifficulty = function(difficulty) {
-    return this.find({ difficulty: difficulty });
-};
-recipeSchema.statics.recipesByTitle = function(title) {
-    return this.find({ title: title });
-};
-recipeSchema.statics.recipesByCategory = function(category) {
-    return this.find({ category: category });
-};
-recipeSchema.statics.findRecipe = function(id) {
-    return this.find({ _id: id });
-};
-recipeSchema.statics.deleteRecipe = function(id) {
-    return this.deleteOne({ _id: id });
-};
-recipeSchema.statics.updateRecipe = function(id, body) {
-    return this.updateOne({ _id: id }, {$set: body});
-};
-recipeSchema.statics.createRecipe = function(newRecipe) {
-    return this.insertOne(newRecipe);
-};
-recipeSchema.statics.getAllRecipes = function() {
-    return this.find();
-};
-// 
 
 const RecipeModel = mongoose.model('recipes', recipeSchema);
 

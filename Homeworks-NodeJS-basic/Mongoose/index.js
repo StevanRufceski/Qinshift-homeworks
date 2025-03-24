@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 const app = express();
 app.use(express.json());
+app.get('/');
 
 import router from './routes/recipeRoutes.js'
 
@@ -19,9 +20,10 @@ const {
     PORT,
     HOSTNAME,
 } = process.env;
+const URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CLUSTER}.mongodb.net/${MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+
 
 async function init() {
-    const URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CLUSTER}.mongodb.net/${MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
 
     await mongoose.connect(URI);
 
