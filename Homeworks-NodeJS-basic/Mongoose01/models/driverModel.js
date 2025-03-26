@@ -14,6 +14,9 @@ const driverSchema = new Schema({
         min: 0,
         required: true,
     }
+},
+{
+    timestamps: true,
 })
-const driverModel = model('drivers', driverSchema);
-export default driverModel;
+const DriverModel = model('drivers', driverSchema);
+export default DriverModel;

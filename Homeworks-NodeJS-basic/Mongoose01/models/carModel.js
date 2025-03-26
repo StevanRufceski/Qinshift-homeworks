@@ -15,6 +15,9 @@ const carSchema = new Schema({
         min: 0,
         required: true,
     },
+},
+{
+    timestamps: true,
 })
-const carModel = model('cars', carSchema);
-export default carModel;
+const CarModel = model('cars', carSchema);
+export default CarModel;

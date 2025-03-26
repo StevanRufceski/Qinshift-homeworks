@@ -18,6 +18,9 @@ const passengerSchema = new Schema({
         type: Number,
         default: 0,
     }
+},
+{
+    timestamps: true,
 })
-const passengerModel = model('passengers', passengerSchema);
-export default passengerModel;
+const PassengerModel = model('passengers', passengerSchema);
+export default PassengerModel;

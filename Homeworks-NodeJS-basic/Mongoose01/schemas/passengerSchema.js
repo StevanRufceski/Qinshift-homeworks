@@ -13,5 +13,7 @@ export const createPassengerSchema = z.object ({
     discount: z
     .number()
     .min(1, 'Discount must be at least 1 character')
+    .max(2, 'Discount must be at maximum 2 characters')
+    .positive('Discount must be a positive number'),
 })
 export const updatePassengerSchema = createPassengerSchema.partial();
