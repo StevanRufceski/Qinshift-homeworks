@@ -29,7 +29,7 @@ const RideServices = {
             throw new Error('Car not found');
         }
         const discountedPrice = price*(1-thePassenger.discount);
-        const newDriverTotalKm = theDriver.totalKm + km;
+        const newDriverTotalKm = theDriver.totalKm + Number(km);
         const newDriverTotalIncome = theDriver.totalIncome + discountedPrice;
         const driverUpdateBody = {
             totalKm: newDriverTotalKm,
@@ -65,41 +65,53 @@ const RideServices = {
     },
     async deleteRide (id) {
         const theRide = await RideModel.findById(id);
-        const theDriverId = theRide.driverId;
-        const thePassengerId = theRide.passengerId;
-        const theCarId = theRide.CarId;
-
+        if (!theRide) {
+            throw new Error('Ride not found');
+        }
+        const theDriverId = theRide.driver;
+        const thePassengerId = theRide.passenger;
+        const theCarId = theRide.car;
         const theDriver = await DriverModel.findById(theDriverId);
+        if (!theDriver) {
+            throw new Error('Driver not found');
+        }
         const thePassenger = await PassengerModel.findById(thePassengerId);
+        if (!thePassenger) {
+            throw new Error('Passenger not found');
+        }
         const theCar = await CarModel.findById(theCarId);
-
-        const discountedPrice = price*(1-thePassenger.discount);
+        if (!theCar) {
+            throw new Error('Car not found');
+        }
         const newDriverTotalKm = theDriver.totalKm - theRide.km;
         const newDriverTotalIncome = theDriver.totalIncome - theRide.income;
-        const driverUpdate = `{
-            "totalKm = "${newDriverTotalKm}"
-            "totalIncome = "${newDriverTotalIncome}"
-        }`
+        const driverUpdateBody = {
+            totalKm: newDriverTotalKm,
+            totalIncome: newDriverTotalIncome,
+        };
         const newPassengerTotalKm = thePassenger.totalKm - theRide.km;
         const newPassengerTotalIncome = thePassenger.totalIncome - theRide.income;
-        const passengerUpdate = `{
-            "totalKm = "${newPassengerTotalKm}"
-            "totalIncome = "${newPassengerTotalIncome}"
-        }`
+        const passengerUpdateBody = {
+            totalKm: newPassengerTotalKm,
+            totalIncome: newPassengerTotalIncome,
+        }
         const newCarTotalKm = theCar.totalKm - theRide.km;
         const newCarTotalIncome = theCar.totalIncome - theRide.income;
-        const carUpdate = `{
-            "totalKm = "${newCarTotalKm}"
-            "totalIncome = "${newCarTotalIncome}"
-        }`
-        DriverModel.updateDriver (driverId, driverUpdate);
-        PassengerModel.updatePassenger (passengerId, passengerUpdate);
-        CarModel.updateCar (carId, carUpdate)
+        const carUpdateBody = {
+            totalKm: newCarTotalKm,
+            totalIncome: newCarTotalIncome,
+        }
+        await DriverModel.findByIdAndUpdate(theDriverId, driverUpdateBody, { new: true });
+        await PassengerModel.findByIdAndUpdate(thePassengerId, passengerUpdateBody, { new: true });
+        await CarModel.findByIdAndUpdate(theCarId, carUpdateBody, { new: true });
         await RideModel.findByIdAndDelete(id)
-        return `Ride with ${id} was deleted.`
     },
     async getRideById(id) {
-        const rideDetails = await RideModel.findById(id).populate(['driver', 'passenger','car']);
+        const theRide = await RideModel.findById(id);
+        if (!theRide) {
+            throw new Error('Ride not found');
+        }
+        const rideDetails = theRide.populate(['driver', 'passenger','car']);
         return rideDetails;
     },
 };

@@ -33,9 +33,12 @@ const PassengerServices = {
         await PassengerModel.findByIdAndDelete(id)
         return `Passenger with ${id} was deleted.`
     },
-        async getPassengerById(id) {
-            const passengerDetails = await PassengerModel.findById(id);
-            return passengerDetails;
-        },
+    async getPassengerById(id) {
+        const passengerDetails = await PassengerModel.findById(id);
+        if (!passengerDetails) {
+            throw new Error('Passenger not found');
+        }
+        return passengerDetails;
+    },
 };
 export default PassengerServices;

@@ -34,6 +34,9 @@ const CarServices = {
     },
     async getCarById(id) {
 		const carDetails = await CarModel.findById(id);
+        if (!carDetails) {
+            throw new Error('Car not found');
+        }
 		return carDetails;
 	},
 };

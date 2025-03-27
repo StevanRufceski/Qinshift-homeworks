@@ -34,6 +34,9 @@ const DriverServices = {
     },
     async getDriverById(id) {
         const driverDetails = await DriverModel.findById(id);
+        if (!driverDetails) {
+            throw new Error('Driver not found');
+        }
         return driverDetails;
     },
 };
