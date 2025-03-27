@@ -19,7 +19,7 @@ const CarController = {
     },
     async createCar(req, res) {
         try {
-            const newCar = await PassengerServices.createPassenger(req.body);
+            const newCar = await CarServices.createCar(req.body);
             res.status(201).send(newCar);
         } catch (error) {
             res.status(500).send({

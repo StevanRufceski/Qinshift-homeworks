@@ -16,7 +16,7 @@ const CarServices = {
             return "Car's total km an total income, can not be changed."
         }
     },
-    async createCar (){
+    async createCar (body){
         const {licensePlate} = body;
         let totalKm = 0;
         let totalIncome = 0;

@@ -16,7 +16,7 @@ const PassengerServices = {
             return "Passenger's total km an total income, can not be changed."
         }
     },
-    async createPassenger (){
+    async createPassenger (body){
         const {userName, discount} = body;
         let totalKm = 0;
         let totalIncome = 0;

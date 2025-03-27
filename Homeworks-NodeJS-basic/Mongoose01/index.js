@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose, { connect } from 'mongoose'
 import dotenv from 'dotenv'
-import mainRouter from './routes/main-router.js'
+import MainRouter from './routes/main-router.js'
 
 dotenv.config();
 const {PORT, HOSTNAME, MONGO_USERNAME, MONGO_PASSWORD, MONGO_CLUSTER, MONGO_DB_NAME} = process.env;
@@ -9,14 +9,25 @@ const URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CLUSTER}.
 
 const app = express();
 app.use(express.json())
-app.use('/api', mainRouter)
-( async () => {
+app.use('/api', MainRouter)
+// ( async () => {
+//     try {
+//         await mongoose.connect(URI);
+//     } catch (error){
+//         console.log(`Connection to MongoDB failed!`, error)
+//     }
+//     app.listen(PORT, HOSTNAME, ()=>{
+//         console.log(`Server started listening on http://${HOSTNAME}:${PORT}`)
+//     });
+// })();
+async function init() {
     try {
         await mongoose.connect(URI);
     } catch (error){
         console.log(`Connection to MongoDB failed!`, error)
     }
-    app.listen(PORT, HOSTNAME, ()=>{
-        console.log(`Server started listening on http://${HOSTNAME}:${PORT}`)
+    app.listen(PORT, HOSTNAME, () => {
+        console.log(`Server started listening on http://${HOSTNAME}:${PORT}`);
     });
-})();
+}
+init();

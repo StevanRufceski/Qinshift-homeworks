@@ -16,7 +16,7 @@ const DriverServices = {
             return "Driver's total km an total income, can not be changed."
         }
     },
-    async createDriver () {
+    async createDriver (body) {
         const {userName} = body;
         let totalKm = 0;
         let totalIncome = 0;
