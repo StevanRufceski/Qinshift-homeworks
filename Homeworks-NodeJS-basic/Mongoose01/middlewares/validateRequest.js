@@ -1,4 +1,4 @@
-const validateRequest = schema => async (req, res, next) => {
+const ValidateRequest = schema => async (req, res, next) => {
 	try {
 		await schema.parseAsync(req.body);
 		next();
@@ -8,4 +8,4 @@ const validateRequest = schema => async (req, res, next) => {
 		});
 	}
 };
-export default validateRequest;
+export default ValidateRequest;

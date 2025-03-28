@@ -28,7 +28,7 @@ const RideServices = {
         if (!theCar) {
             throw new Error('Car not found');
         }
-        const discountedPrice = price*(1-thePassenger.discount);
+        const discountedPrice = price*(1-thePassenger.discount/100);
         const newDriverTotalKm = theDriver.totalKm + Number(km);
         const newDriverTotalIncome = theDriver.totalIncome + discountedPrice;
         const driverUpdateBody = {
