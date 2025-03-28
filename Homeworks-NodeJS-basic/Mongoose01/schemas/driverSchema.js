@@ -6,9 +6,11 @@ export const createDriverSchema = z.object ({
     .max(50, 'Driver username can not be more than 50 characters'),
     totalKm: z
     .number()
-    .min(1, 'Total kilometers must be at least 1 character'),
+    .min(1, 'Total kilometers must be at least 1 character')
+    .optional(),
     totalIncome: z
     .number()
     .min(1, 'Total income must be at least 1 character')
+    .optional()
 })
 export const updateDriverSchema = createDriverSchema.partial();

@@ -5,8 +5,8 @@ import { createDriverSchema, updateDriverSchema } from "../schemas/driverSchema.
 
 const DriverRouter = Router()
 DriverRouter.get('/all', DriverController.getAllDrivers);
-DriverRouter.put('/update/:id', DriverController.updateDriver);
-DriverRouter.post('/create', DriverController.createDriver);
+DriverRouter.put('/update/:id', ValidateRequest(updateDriverSchema), DriverController.updateDriver);
+DriverRouter.post('/create', ValidateRequest(createDriverSchema), DriverController.createDriver);
 DriverRouter.delete('/delete/:id', DriverController.deleteDriver);
 DriverRouter.get('/:id', DriverController.getDriverById);
 export default DriverRouter

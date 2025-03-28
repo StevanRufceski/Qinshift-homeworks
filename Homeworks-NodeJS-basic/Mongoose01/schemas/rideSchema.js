@@ -16,7 +16,8 @@ export const createRideSchema = z.object ({
     .min(1, 'Kilometers must be at least 1 character'),
     income: z
     .number()
-    .min(1, 'Income must be at least 1 character'),
+    .min(1, 'Income must be at least 1 character')
+    .optional(),
     price: z
     .number()
     .min(1, 'Income must be at least 1 character')

@@ -7,12 +7,10 @@ const driverSchema = new Schema({
     totalKm: {
         type: Number,
         min: 0,
-        required: true,
     },
     totalIncome: {
         type: Number,
         min: 0,
-        required: true,
     }
 },
 {

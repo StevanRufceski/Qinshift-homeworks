@@ -6,9 +6,11 @@ export const createCarSchema = z.object ({
     .max(10, 'Car license plate can not be more than 10 characters long'),
     totalKm: z
     .number()
-    .min(1, 'Total kilometers must be at least 1 character'),
+    .min(1, 'Total kilometers must be at least 1 character')
+    .optional(),
     totalIncome: z
     .number()
     .min(1, 'Total income must be at least 1 character')
+    .optional()
 })
 export const updateCarSchema = createCarSchema.partial();

@@ -5,8 +5,8 @@ import { createPassengerSchema, updatePassengerSchema } from '../schemas/passeng
 
 const PassengerRouter = Router()
 PassengerRouter.get('/all', PassengerController.getAllPassengers);
-PassengerRouter.put('/update/:id', PassengerController.updatePassenger);
-PassengerRouter.post('/create', PassengerController.createPassenger);
+PassengerRouter.put('/update/:id', ValidateRequest(updatePassengerSchema), PassengerController.updatePassenger);
+PassengerRouter.post('/create', ValidateRequest(createPassengerSchema), PassengerController.createPassenger);
 PassengerRouter.delete('/delete/:id', PassengerController.deletePassenger);
 PassengerRouter.get('/:id', PassengerController.getPassengerById);
 export default PassengerRouter

@@ -31,7 +31,6 @@ const rideSchema = new Schema({
 	income: {
 		type: Number,
 		min: 0,
-		required: true,
 	},
 	price: {
 		type: Number,
