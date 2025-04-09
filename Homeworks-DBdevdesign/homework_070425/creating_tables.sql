@@ -6,7 +6,7 @@ CREATE TABLE student (
     EnrolledDate DATE,
     Gender VARCHAR(6),
     NationalIdNumber INTEGER,
-	StudentCardNumber VARCHAR(50),
+	StudentCardNumber VARCHAR(50)
 );
 CREATE TABLE teacher (
     id SERIAL PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE teacher (
     LastName VARCHAR(50),
     DateOfBirth DATE,
     AcademicRank VARCHAR(30),
-    HireDate DATE,
+    HireDate DATE
 );
 CREATE TABLE grade_details (
     id SERIAL PRIMARY KEY,
@@ -22,14 +22,14 @@ CREATE TABLE grade_details (
     AchievementTypeId VARCHAR(20),
     AchievementPoints SMALLINT,
     AchievementMaxPoints SMALLINT,
-    AchievementMaxDate DATE,
+    AchievementMaxDate DATE
 );
 CREATE TABLE course (
     id SERIAL PRIMARY KEY,
     Name VARCHAR(100),
     Credit SMALLINT,
     AcademicYear DATE,
-    Semester SMALLINT,
+    Semester SMALLINT
 );
 CREATE TABLE grade (
     id SERIAL PRIMARY KEY,
@@ -38,11 +38,11 @@ CREATE TABLE grade (
     TeacherId INTEGER,
     Grade SMALLINT,
 	Comment TEXT,
-	CreatedDate DATE,
+	CreatedDate DATE
 );
 CREATE TABLE achievement_type (
     id SERIAL PRIMARY KEY,
-    Name ARCHAR(50),
+    Name VARCHAR(50),
     Description TEXT,
-    ParticipationRate SMALLINT,
+    ParticipationRate SMALLINT
 );
