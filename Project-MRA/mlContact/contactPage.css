@@ -1,0 +1,108 @@
+/* contact form laptop POV */
+.contact-form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+    margin: 50px auto;
+    justify-self: center;
+  }
+  
+  .contact-form label {
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .contact-form .heading {
+    font-size: 24px;
+    color: black;
+    ;
+    margin-bottom: 12px;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-form textarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  .contact-form input, .contact-form textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ff6384;
+  }
+  
+  .contact-form button[type="submit"] {
+    background-color: #ff6384;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .contact-form button[type="submit"]:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  /*  */
+/* Language selector */
+  .language-selector {
+    width: 40px;
+
+
+  }
+  .selected {
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .selected img {
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%; /* Dropdown touches the selected flag */
+    left: 0;
+    background: white;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 0; /* No padding to prevent a gap */
+    margin: 0;  /* No margin either */
+  }
+  
+  .dropdown a:hover {
+    background: #f0f0f0;
+  }
+  
+  .dropdown img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  /* Show dropdown on hover */
+  .language-selector:hover .dropdown {
+    display: block;
+  }
+  /*  */
+  
+  

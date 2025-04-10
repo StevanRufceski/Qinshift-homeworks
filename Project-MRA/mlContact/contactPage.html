@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="contactPage.css" type="text/css">
+</head>
+<body>
+  <div class="language-selector">
+    <div class="selected">
+      <img src="flags/eng.jpg" alt="English">
+    </div>
+    <ul class="dropdown">
+      <li><a href="#"><img src="flags/fra.jpg" alt="Français"></a></li>
+      <li><a href="#"><img src="flags/esp.jpg" alt="Español"></a></li>
+      <li><a href="#"><img src="flags/deu.jpg" alt="Deutsch"></a></li>
+    </ul>
+  </div>
+  
+  <div class="contact-form">
+    <span class="heading">Contact Us</span>
+    <form>
+      <label for="name">Name:</label>
+      <input id="nameInput" type="text" required>
+      <label for="email">Email:</label>
+      <input itemid="emailInput" type="email" id="email" name="email" required>
+      <label for="message">Message:</label>
+      <textarea id="messageInput" name="message" required></textarea>
+      <button id="submitInputs" type="submit">Submit</button>
+    </form>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+  <script src="contactPage.js"></script>
+</body>
+</html>
