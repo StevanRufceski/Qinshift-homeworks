@@ -62,15 +62,14 @@
 /* Language selector */
   .language-selector {
     width: 40px;
-
-
+    position: relative;
+    display: inline-block;
   }
   .selected {
     cursor: pointer;
     border-radius: 5px;
     overflow: hidden;
   }
-  
   .selected img {
     width: 100%;
     display: block;
@@ -89,9 +88,17 @@
     padding: 0; /* No padding to prevent a gap */
     margin: 0;  /* No margin either */
   }
+
+  /* .dropdown li {
+    width: 100%;
+    margin-top: 5px;
+  } */
   
   .dropdown a:hover {
-    background: #f0f0f0;
+    /* background: #726c6c; */
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 5px;
   }
   
   .dropdown img {
