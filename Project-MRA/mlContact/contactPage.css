@@ -67,8 +67,8 @@
   }
   .selected {
     cursor: pointer;
-    border-radius: 5px;
     overflow: hidden;
+    padding-bottom: 4px;
   }
   .selected img {
     width: 100%;
@@ -80,25 +80,14 @@
     position: absolute;
     top: 100%; /* Dropdown touches the selected flag */
     left: 0;
-    background: white;
-    border-radius: 5px;
     display: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    padding: 0; /* No padding to prevent a gap */
-    margin: 0;  /* No margin either */
+    margin: 0px;
+    padding: 0px;
   }
 
-  /* .dropdown li {
-    width: 100%;
-    margin-top: 5px;
-  } */
-  
-  .dropdown a:hover {
-    /* background: #726c6c; */
-    border-radius: 5px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 5px;
+ 
+  .dropdown img:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
   }
   
   .dropdown img {

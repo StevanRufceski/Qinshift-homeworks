@@ -1,3 +1,4 @@
+var language = 'france'
 const content = {
   en: {
       title: "Welcome!",
@@ -24,3 +25,13 @@ document.querySelectorAll('.dropdown-content a').forEach(item => {
       document.querySelector('#content p').textContent = content[language].message;
   });
 });
+if (language === 'english') {
+    console.log(content.en.title)
+} else if (language === 'german') {
+    console.log(content.de.title)
+} else if (language === 'spanish') {
+    console.log(content.es.title)
+} else if (language === 'france') {
+    console.log(content.fr.title)
+}
+
