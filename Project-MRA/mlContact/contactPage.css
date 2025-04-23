@@ -60,45 +60,32 @@
   }
   /*  */
 /* Language selector */
-  .language-selector {
+  #language-selector {
     width: 40px;
     position: relative;
     display: inline-block;
   }
-  .selected {
-    cursor: pointer;
-    overflow: hidden;
-    padding-bottom: 4px;
-  }
-  .selected img {
-    width: 100%;
-    display: block;
-    border-radius: 5px;
-  }
-  
-  .dropdown {
-    position: absolute;
-    top: 100%; /* Dropdown touches the selected flag */
-    left: 0;
-    display: none;
-    margin: 0px;
-    padding: 0px;
-  }
 
- 
-  .dropdown img:hover {
+  .langOption {
+    width: 100%;
+    border-radius: 5px;
+    display: none;
+  }
+  .langOption:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
   }
-  
-  .dropdown img {
+  .langSelection {
     width: 100%;
     border-radius: 5px;
-  }
-  
-  /* Show dropdown on hover */
-  .language-selector:hover .dropdown {
     display: block;
   }
-  /*  */
+  #language-selector:hover a img {
+    display: block;
+    margin-bottom: 4px;
+  }
+  #language-selector:hover .langSelection {
+    display: block;
+    margin-bottom: 4px;
+  }
   
   

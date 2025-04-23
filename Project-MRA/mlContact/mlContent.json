@@ -1,1 +1,24 @@
-[]
+
+    {
+        "en": {
+          "greeting": "Hello",
+          "welcome": "Welcome to our website!",
+          "name": "Name",
+          "age": "Age",
+          "city": "City"
+        },
+        "es": {
+          "greeting": "Hola",
+          "welcome": "¡Bienvenido a nuestro sitio web!",
+          "name": "Nombre",
+          "age": "Edad",
+          "city": "Ciudad"
+        },
+        "fr": {
+          "greeting": "Bonjour",
+          "welcome": "Bienvenue sur notre site!",
+          "name": "Nom",
+          "age": "Âge",
+          "city": "Ville"
+        }
+    }
