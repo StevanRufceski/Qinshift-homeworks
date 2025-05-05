@@ -52,7 +52,7 @@ export class BooksController {
     }
     @Put('/:id')
     changeBook(@Body() changeBookData: UpsertBook, @Param('id') id: string){
-        const bookIndex = this.books.findIndex((book) => book.id === parseInt(id));
+        const bookIndex = this.books.findIndex((book) => book.id === Number(id));
         const changedBook = {
             ... changeBookData,
             id: parseInt(id),
@@ -62,7 +62,7 @@ export class BooksController {
     }
     @Patch('/:id')
     updateBook(@Body() updateBookData: Partial<UpsertBook>, @Param('id') id:string){
-        const bookIndex = this.books.findIndex((book) => book.id === parseInt(id));
+        const bookIndex = this.books.findIndex((book) => book.id === Number(id));
         const updatedBook = {
             ...this.books[bookIndex],
             ...updateBookData,
