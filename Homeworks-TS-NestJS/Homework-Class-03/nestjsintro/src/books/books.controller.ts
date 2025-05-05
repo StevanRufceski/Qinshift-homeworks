@@ -55,7 +55,7 @@ export class BooksController {
         const bookIndex = this.books.findIndex((book) => book.id === Number(id));
         const changedBook = {
             ... changeBookData,
-            id: parseInt(id),
+            id: Number(id),
         } satisfies Book;
         this.books[bookIndex] = changedBook;
         return changedBook
@@ -66,7 +66,7 @@ export class BooksController {
         const updatedBook = {
             ...this.books[bookIndex],
             ...updateBookData,
-            id: parseInt(id),
+            id: Number(id),
         } satisfies Book;
         this.books[bookIndex] = updatedBook;
         return updatedBook
