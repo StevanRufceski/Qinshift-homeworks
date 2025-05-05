@@ -19,6 +19,17 @@ export class BooksController {
     private books: Book[] = [
         { id: 1, title: 'Zoki Poki', price: 10, author: 'Olivera Nikolova' },
     ];
+    @Get('/filter')
+    filterBooks(@Query() searchParams: searchBooksParams): Book[] {
+        let filteredBooks = [...this.books];
+        if (searchParams.minPrice){
+            filteredBooks = filteredBooks.filter((book) => book.price > Number(searchParams.minPrice),);
+        }
+        if (searchParams.author){
+            filteredBooks = filteredBooks.filter((book) => book.author === searchParams.author,);
+        }
+        return filteredBooks;
+    }
 
     @Get()
     getAllBooks(): Book[]{
@@ -40,22 +51,22 @@ export class BooksController {
         return newBook;
     }
     @Put('/:id')
-    changeBook(@Param('id') id: string, @Body() changeBookData: UpsertBook){
-        const bookIndex = this.books.findIndex((book) => book.id = Number(id));
+    changeBook(@Body() changeBookData: UpsertBook, @Param('id') id: string){
+        const bookIndex = this.books.findIndex((book) => book.id === parseInt(id));
         const changedBook = {
             ... changeBookData,
-            id: Number(id),
+            id: parseInt(id),
         } satisfies Book;
         this.books[bookIndex] = changedBook;
         return changedBook
     }
     @Patch('/:id')
-    updateBook(@Param('id') id:string, @Body() updateBookData: Partial<UpsertBook>){
-        const bookIndex = this.books.findIndex((book) => book.id = Number(id));
+    updateBook(@Body() updateBookData: Partial<UpsertBook>, @Param('id') id:string){
+        const bookIndex = this.books.findIndex((book) => book.id === parseInt(id));
         const updatedBook = {
             ...this.books[bookIndex],
             ...updateBookData,
-            id: Number(id),
+            id: parseInt(id),
         } satisfies Book;
         this.books[bookIndex] = updatedBook;
         return updatedBook
@@ -65,15 +76,5 @@ export class BooksController {
         this.books = this.books.filter((book) => book.id !== Number(id));
         return this.books;
     }
-    @Get('/filter')
-    filterBooks(@Query() searchParams: searchBooksParams): Book[] {
-        let filteredBooks = [...this.books];
-        if (searchParams.minPrice){
-            filteredBooks = filteredBooks.filter((book) => book.price > Number(searchParams.minPrice),);
-        }
-        if (searchParams.author){
-            filteredBooks = filteredBooks.filter((book) => book.author === searchParams.author,);
-        }
-        return filteredBooks;
-    }
+
 }
