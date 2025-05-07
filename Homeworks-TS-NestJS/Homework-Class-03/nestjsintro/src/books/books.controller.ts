@@ -41,6 +41,10 @@ export class BooksController {
     @Get('/:id')
     @HttpCode(HttpStatus.FOUND)
     getBookById(@Param('id') id: string): Book | undefined{
+        const bookIndex = this.books.findIndex((book) => book.id === Number(id))
+        if (bookIndex === -1) {
+            throw new NotFoundException(`Book with ID ${id} not found`);
+        }
         return this.books.find((book) => book.id === Number(id));
     }
 
