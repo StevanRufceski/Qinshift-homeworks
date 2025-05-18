@@ -1,12 +1,8 @@
-export interface PostaAuthor {
-  idOfAuthor: number;
-}
-
 export interface Posta {
     id: number;
     title: string;
     content: string;
-    authorId: PostaAuthor;
+    authorId: number;
 }
 
 export type CreatePosta = Omit<Posta, 'id'>;

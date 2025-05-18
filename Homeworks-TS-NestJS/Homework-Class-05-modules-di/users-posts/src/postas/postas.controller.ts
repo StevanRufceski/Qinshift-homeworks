@@ -1,10 +1,17 @@
-import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete  } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete, Query } from '@nestjs/common';
 import { PostasService } from './postas.service';
 import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
 
 @Controller('postas')
 export class PostasController {
     constructor(private readonly postasService: PostasService) { }
+
+    @Get()
+    @HttpCode(HttpStatus.FOUND)
+    filterPostasByAuthorId(@Query('author') authorId: number): Posta[] {
+        return this.postasService.filterPostasByAuthorId(Number(authorId));
+    }
+
     @Get()
     @HttpCode(HttpStatus.FOUND)
     findAll(): Posta[] {

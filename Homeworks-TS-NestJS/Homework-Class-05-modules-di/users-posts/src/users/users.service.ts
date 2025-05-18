@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { error } from 'console';
 import { User, CreateUser, UpdateUser } from 'src/common/types/user';
 
 @Injectable()
@@ -10,12 +9,14 @@ export class UsersService {
             name: 'oneuser',
             email: 'oneuser@getMaxListeners.com',
             role: 'supervisor',
+            ownpostasids: [1],
         },
         {
             id: 2,
             name: 'twouser',
             email: 'twouser@getMaxListeners.com',
             role: 'operator',
+            ownpostasids:[2]
         }
     ];
     findAll(): User[] {
@@ -29,6 +30,10 @@ export class UsersService {
     create(body: CreateUser): User {
         if ((!body.name) || (!body.email) || (!body.role)) {
             throw new BadRequestException(`You must enter all properties for User`)
+        }
+        const theUsers = this.users.filter(u => u.email === body.email);
+        if (theUsers.length > 0) {
+            throw new BadRequestException(`User with email ${body.email} already exists`);
         }
         const newUser = {
             ...body,
