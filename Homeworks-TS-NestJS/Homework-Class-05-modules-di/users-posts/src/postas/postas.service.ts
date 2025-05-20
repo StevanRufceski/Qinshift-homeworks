@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
 import { UsersService } from 'src/users/users.service';
 
@@ -18,7 +18,6 @@ export class PostasService {
             title: 'twoposta',
             content: 'talking about twoposta',
             authorId: 2,
-
         }
     ];
 
@@ -26,13 +25,17 @@ export class PostasService {
         if (!authorId) {
             return this.postas;
         }
-        const thePostas = this.postas.filter(p => p.authorId === authorId);
 
-        if (thePostas.length === 0) {
+        const theUser = this.usersService.findOne(authorId);
+        if (!theUser) {
             throw new BadRequestException(`You must enter an existing User id`);
         }
-        return this.postas.filter(p => p.authorId === authorId);
 
+        const thePostas = this.postas.filter(p => p.authorId === authorId);
+        if (thePostas.length === 0) {
+            throw new BadRequestException(`User with ID ${authorId} doesn't have any postas.`);
+        }
+        return this.postas.filter(p => p.authorId === authorId);
     }
 
 
@@ -46,55 +49,75 @@ export class PostasService {
     }
 
     create(body: CreatePosta): Posta {
-    if (!body.title || !body.content || !body.authorId) {
-        throw new BadRequestException(`You must enter all properties for Posta`);
+        if (!body.title || !body.content || !body.authorId) {
+            throw new BadRequestException(`You must enter all properties for Posta`);
+        }
+
+        const theUser = this.usersService.findOne(body.authorId);
+        if (!theUser) {
+            throw new BadRequestException(`You must enter an existing User id`);
+        }
+
+        const newPosta: Posta = {
+            ...body,
+            id: this.postas.length + 1,
+        };
+        // add newPosta to user
+        const updatedUser = this.usersService.update(body.authorId, {
+            name: theUser.name,
+            email: theUser.email,
+            role: theUser.role,
+            ownpostasids: [...theUser.ownpostasids, newPosta.id],
+        });
+        console.log('Updated user:', updatedUser);
+        // 
+
+        this.postas.push(newPosta);
+
+        return newPosta;
     }
-
-    const theUser = this.usersService.findOne(body.authorId);
-    if (!theUser) {
-        throw new BadRequestException(`You must enter an existing User id`);
-    }
-
-    const newPosta: Posta = {
-        ...body,
-        id: this.postas.length + 1,
-    };
-
-    this.usersService.update(body.authorId, {
-        name: theUser.name,
-        email: theUser.email,
-        role: theUser.role,
-        ownpostasids: [...theUser.ownpostasids, newPosta.id],
-    });
-
-    this.postas.push(newPosta);
-
-    return newPosta;
-}
 
     update(id: number, body: UpdatePosta): Posta {
-        const userIndex = this.postas.findIndex(
+        const postaIndex = this.postas.findIndex(
             (user) => user.id === id,
         );
 
-        if (userIndex < 0) {
+        if (postaIndex < 0) {
             throw new NotFoundException(`Posta with ID: ${id} is not found`);
         }
-        const updatedUser = {
-            ...this.postas[userIndex],
+        const updatedPosta = {
+            ...this.postas[postaIndex],
             ...body,
             id,
         };
-        this.postas[userIndex] = updatedUser;
-        return updatedUser;
+        this.postas[postaIndex] = updatedPosta;
+        return updatedPosta;
     }
     delete(id: number): void {
-        const index = this.postas.findIndex((user) => user.id === id);
+        const postaIndex = this.postas.findIndex(
+            (posta) => posta.id === id,
+        );
 
-        if (index < 0) {
-            return;
+        if (postaIndex < 0) {
+            throw new NotFoundException(`Posta with ID: ${id} is not found`);
         }
-        this.postas.splice(index, 1);
+
+        // remove newPosta from user
+        const theUser = this.usersService.findOne(this.postas[postaIndex].authorId);
+        if (!theUser) {
+            throw new BadRequestException(`You must enter an existing User id`);
+        }
+        theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].authorId);
+        const updatedUser = this.usersService.update(this.postas[postaIndex].authorId, {
+            name: theUser.name,
+            email: theUser.email,
+            role: theUser.role,
+            ownpostasids: theUser.ownpostasids,
+        });
+        console.log('Updated user:', updatedUser);
+        // 
+        this.postas.splice(postaIndex, 1);
+
     }
 
 }

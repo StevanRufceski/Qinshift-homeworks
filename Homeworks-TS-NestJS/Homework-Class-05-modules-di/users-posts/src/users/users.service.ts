@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { User, CreateUser, UpdateUser } from 'src/common/types/user';
 
+
 @Injectable()
 export class UsersService {
     private users: User[] = [
@@ -16,7 +17,14 @@ export class UsersService {
             name: 'twouser',
             email: 'twouser@getMaxListeners.com',
             role: 'operator',
-            ownpostasids:[2]
+            ownpostasids: [2]
+        },
+        {
+            id: 3,
+            name: 'threeuser',
+            email: 'threeser@getMaxListeners.com',
+            role: 'buyer',
+            ownpostasids: []
         }
     ];
     findAll(): User[] {
@@ -62,7 +70,7 @@ export class UsersService {
         const index = this.users.findIndex((user) => user.id === id);
 
         if (index < 0) {
-            return;
+            throw new NotFoundException(`User with ID: ${id} is not found`);
         }
         this.users.splice(index, 1);
     }
