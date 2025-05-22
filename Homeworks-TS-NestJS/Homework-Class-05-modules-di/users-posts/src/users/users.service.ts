@@ -1,12 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { User, CreateUser, UpdateUser } from 'src/common/types/user';
-import { PostasService } from 'src/users/postas.service';
+import { UserDto, CreateUserDto, UpdateUserDto } from 'src/users/dto/users.dto';
 
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly postasService: PostasService) { }
-    private users: User[] = [
+    private users: UserDto[] = [
         {
             id: 1,
             name: 'oneuser',
@@ -29,15 +27,19 @@ export class UsersService {
             ownpostasids: []
         }
     ];
-    findAll(): User[] {
+    findAll(): UserDto[] {
         return this.users;
     }
 
-    findOne(id: number): User | null {
-        return this.users.find((user) => user.id === id) ??
-            null;
+    findOne(id: number): UserDto {
+        const user: UserDto | undefined = this.users.find(
+            (user) => user.id === id);
+        if (!user) {
+            throw new NotFoundException (`User with id ${id} is not found.`);
+        }
+        return user;
     }
-    create(body: CreateUser): User {
+    create(body: CreateUserDto): UserDto {
         if ((!body.name) || (!body.email) || (!body.role)) {
             throw new BadRequestException(`You must enter all properties for User`)
         }
@@ -48,11 +50,11 @@ export class UsersService {
         const newUser = {
             ...body,
             id: this.users.length + 1,
-        } satisfies User;
+        } satisfies UserDto;
         this.users.push(newUser);
         return newUser;
     }
-    update(id: number, body: UpdateUser): User {
+    update(id: number, body: UpdateUserDto): UserDto {
         const userIndex = this.users.findIndex(
             (user) => user.id === id,
         );

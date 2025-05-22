@@ -1,6 +1,6 @@
-import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User, CreateUser, UpdateUser } from 'src/common/types/user';
+import { UserDto, CreateUserDto, UpdateUserDto } from 'src/users/dto/users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -8,28 +8,28 @@ export class UsersController {
 
     @Get()
     @HttpCode(HttpStatus.FOUND)
-    findAll(): User[] {
+    findAll(): UserDto[] {
         return this.usersService.findAll();
     }
 
     @Get('/:id')
     @HttpCode(HttpStatus.FOUND)
-    findOne(@Param('id') id: string): User | null {
-        return this.usersService.findOne(+id)
+    findOne(@Param('id', ParseIntPipe) id: number): UserDto | null {
+        return this.usersService.findOne(id)
     }
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() body: CreateUser): User {
+    create(@Body() body: CreateUserDto): UserDto {
         return this.usersService.create(body)
     }
     @Patch('/:id')
     @HttpCode(HttpStatus.ACCEPTED)
-    update(@Body() body: UpdateUser, @Param('id') id: string): User | null {
-        return this.usersService.update(+id, body)
+    update(@Body() body: UpdateUserDto, @Param('id', ParseIntPipe) id: number): UserDto | null {
+        return this.usersService.update(id, body)
     }
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id') id: string): void {
+    delete(@Param('id', ParseIntPipe) id: number): void {
         return this.usersService.delete(+id)
     }
 }

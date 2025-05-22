@@ -1,6 +1,6 @@
-import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete, Query } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Get, Param, Body, Post, Patch, Delete, Query, ParseIntPipe } from '@nestjs/common';
 import { PostasService } from './postas.service';
-import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
+import { PostaDto, CreatePostaDto, UpdatePostaDto } from 'src/postas/dto/postas.dto';
 
 @Controller('postas')
 export class PostasController {
@@ -8,35 +8,35 @@ export class PostasController {
 
     @Get('/filter')
     @HttpCode(HttpStatus.FOUND)
-    filterPostasByAuthorId(@Query('author') authorId: number): Posta[] {
+    filterPostasByAuthorId(@Query('author') authorId: number): PostaDto[] {
         return this.postasService.filterPostasByAuthorId(Number(authorId));
     }
 
     @Get()
     @HttpCode(HttpStatus.FOUND)
-    findAll(): Posta[] {
+    findAll(): PostaDto[] {
         return this.postasService.findAll();
     }
 
     @Get('/:id')
     @HttpCode(HttpStatus.FOUND)
-    findOne(@Param('id') id: string): Posta | null {
-        return this.postasService.findOne(+id)
+    findOne(@Param('id', ParseIntPipe) id: number): PostaDto | null {
+        return this.postasService.findOne(id)
     }
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() body: CreatePosta): Posta {
+    create(@Body() body: CreatePostaDto): PostaDto {
         return this.postasService.create(body)
     }
     @Patch('/:id')
     @HttpCode(HttpStatus.ACCEPTED)
-    update(@Body() body: UpdatePosta, @Param('id') id: string): Posta | null {
-        return this.postasService.update(+id, body)
+    update(@Body() body: UpdatePostaDto, @Param('id', ParseIntPipe) id: number): PostaDto | null {
+        return this.postasService.update(id, body)
     }
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id') id: string): void {
-        return this.postasService.delete(+id)
+    delete(@Param('id', ParseIntPipe) id: number): void {
+        return this.postasService.delete(id)
     }
 
 }

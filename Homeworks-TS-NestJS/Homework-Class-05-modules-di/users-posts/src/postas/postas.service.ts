@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
+import { PostaDto, CreatePostaDto, UpdatePostaDto } from 'src/postas/dto/postas.dto';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class PostasService {
     constructor(private readonly usersService: UsersService) { }
-    private postas: Posta[] = [
+    private postas: PostaDto[] = [
         {
             id: 1,
             title: 'oneposta',
@@ -21,7 +21,7 @@ export class PostasService {
         }
     ];
 
-    filterPostasByAuthorId(authorId: number): Posta[] {
+    filterPostasByAuthorId(authorId: number): PostaDto[] {
         if (!authorId) {
             return this.postas;
         }
@@ -39,16 +39,20 @@ export class PostasService {
     }
 
 
-    findAll(): Posta[] {
+    findAll(): PostaDto[] {
         return this.postas;
     }
 
-    findOne(id: number): Posta | null {
-        return this.postas.find((posta) => posta.id === id) ??
-            null;
+    findOne(id: number): PostaDto {
+        const posta: PostaDto | undefined = this.postas.find(
+            (posta) => posta.id === id);
+        if (!posta) {
+            throw new NotFoundException(`Posta with id ${id} is not found.`);
+        }
+        return posta;
     }
 
-    create(body: CreatePosta): Posta {
+    create(body: CreatePostaDto): PostaDto {
         if (!body.title || !body.content || !body.authorId) {
             throw new BadRequestException(`You must enter all properties for Posta`);
         }
@@ -58,7 +62,7 @@ export class PostasService {
             throw new BadRequestException(`You must enter an existing User id`);
         }
 
-        const newPosta: Posta = {
+        const newPosta: PostaDto = {
             ...body,
             id: this.postas.length + 1,
         };
@@ -69,13 +73,11 @@ export class PostasService {
             ...theUser,
             ownpostasids: [...theUser.ownpostasids, newPosta.id],
         });
-        console.log('Updated user:', updatedUser);
-        console.log('After update - ownpostasids:', updatedUser.ownpostasids);
         // 
         return newPosta;
     }
 
-    update(id: number, body: UpdatePosta): Posta {
+    update(id: number, body: UpdatePostaDto): PostaDto {
         const postaIndex = this.postas.findIndex(
             (user) => user.id === id,
         );
