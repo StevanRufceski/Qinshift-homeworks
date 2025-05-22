@@ -6,7 +6,7 @@ import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
 export class PostasController {
     constructor(private readonly postasService: PostasService) { }
 
-    @Get()
+    @Get('/filter')
     @HttpCode(HttpStatus.FOUND)
     filterPostasByAuthorId(@Query('author') authorId: number): Posta[] {
         return this.postasService.filterPostasByAuthorId(Number(authorId));

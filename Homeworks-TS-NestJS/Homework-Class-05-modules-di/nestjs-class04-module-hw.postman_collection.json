@@ -262,14 +262,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/postas?author=1",
+					"raw": "http://localhost:3000/postas/filter?author=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"postas"
+						"postas",
+						"filter"
 					],
 					"query": [
 						{

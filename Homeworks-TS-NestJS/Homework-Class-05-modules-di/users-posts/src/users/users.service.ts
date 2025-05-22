@@ -1,9 +1,11 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { User, CreateUser, UpdateUser } from 'src/common/types/user';
+import { PostasService } from 'src/users/postas.service';
 
 
 @Injectable()
 export class UsersService {
+    constructor(private readonly postasService: PostasService) { }
     private users: User[] = [
         {
             id: 1,

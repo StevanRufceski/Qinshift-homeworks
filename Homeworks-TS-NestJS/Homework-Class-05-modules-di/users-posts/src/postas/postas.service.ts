@@ -1,4 +1,4 @@
-import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Posta, CreatePosta, UpdatePosta } from 'src/common/types/posta';
 import { UsersService } from 'src/users/users.service';
 
@@ -62,18 +62,16 @@ export class PostasService {
             ...body,
             id: this.postas.length + 1,
         };
+        this.postas.push(newPosta);
         // add newPosta to user
+        console.log('Appending to ownpostasids:', theUser.ownpostasids, newPosta.id);
         const updatedUser = this.usersService.update(body.authorId, {
-            name: theUser.name,
-            email: theUser.email,
-            role: theUser.role,
+            ...theUser,
             ownpostasids: [...theUser.ownpostasids, newPosta.id],
         });
         console.log('Updated user:', updatedUser);
+        console.log('After update - ownpostasids:', updatedUser.ownpostasids);
         // 
-
-        this.postas.push(newPosta);
-
         return newPosta;
     }
 
@@ -107,7 +105,7 @@ export class PostasService {
         if (!theUser) {
             throw new BadRequestException(`You must enter an existing User id`);
         }
-        theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].authorId);
+        theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].id);
         const updatedUser = this.usersService.update(this.postas[postaIndex].authorId, {
             name: theUser.name,
             email: theUser.email,
