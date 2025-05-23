@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"name\": \"tjvjhv\",\r\n        \"email\": \"threeuser1@getMaxListeners.com\",\r\n        \"role\": \"buyer\",\r\n        \"id\": 3\r\n    }",
+					"raw": "    {\r\n        \"id\": 1,\r\n        \"name\": \"threeuser\",\r\n        \"email\": \"threeuser@getMaxListeners.com\",\r\n        \"role\": \"supervisor\",\r\n        \"ownpostasids\": [\r\n            \r\n        ]\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -138,7 +138,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "4"
+							"value": "3"
 						}
 					]
 				}
@@ -199,7 +199,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"id\": 1,\r\n        \"title\": \"onepostaPPP\",\r\n        \"content\": \"talking about onepostaPPP\",\r\n        \"authorId\": 1\r\n    }",
+					"raw": "    {\r\n        \"title\": \"fourposta\",\r\n        \"content\": \"talking about fourposta\",\r\n        \"authorId\": 2\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -236,13 +236,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/postas/:id",
+					"raw": "http://localhost:3000/api/postas/:id",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"postas",
 						":id"
 					],
@@ -276,7 +277,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "3"
+							"value": "1"
 						}
 					]
 				}
@@ -289,7 +290,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/postas?author=1",
+					"raw": "http://localhost:3000/api/postas/filter?author=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -297,12 +298,13 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"postas"
+						"postas",
+						"filter"
 					],
 					"query": [
 						{
 							"key": "author",
-							"value": "1"
+							"value": "3"
 						}
 					]
 				}
