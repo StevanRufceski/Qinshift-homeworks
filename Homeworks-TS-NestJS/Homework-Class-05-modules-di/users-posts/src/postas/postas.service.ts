@@ -69,7 +69,8 @@ export class PostasService {
         this.postas.push(newPosta);
         // add newPosta to user
         console.log('Appending to ownpostasids:', theUser.ownpostasids, newPosta.id);
-        const updatedUser = this.usersService.update(body.authorId, {
+        theUser.ownpostasids.push(newPosta.id)
+        this.usersService.update(body.authorId, {
             ...theUser,
             ownpostasids: [...theUser.ownpostasids, newPosta.id],
         });

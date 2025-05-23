@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsArray, MinLength, IsNumber } from 'class-validator'
+import { IsString, IsEmail, IsArray, MinLength, IsNumber, IsDefined } from 'class-validator'
 export class CreateUserDto {
     @IsString()
     @MinLength(2)
@@ -8,8 +8,10 @@ export class CreateUserDto {
     email: string;
     @IsString()
     @MinLength(2)
+    @IsDefined()
     role: string;
     @IsArray()
+    @IsDefined()
     ownpostasids: number[];
 }    
 export class UpdateUserDto extends CreateUserDto{}

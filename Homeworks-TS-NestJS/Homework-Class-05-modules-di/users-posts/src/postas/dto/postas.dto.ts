@@ -1,4 +1,4 @@
-import { IsString, MinLength, IsNumber } from 'class-validator'
+import { IsString, MinLength, IsNumber, IsDefined } from 'class-validator'
 export class CreatePostaDto {
     @IsString()
     @MinLength(2)
@@ -7,6 +7,7 @@ export class CreatePostaDto {
     @MinLength(2)
     content: string;
     @IsNumber()
+    @IsDefined()
     authorId: number;
 }    
 export class UpdatePostaDto extends CreatePostaDto{}
