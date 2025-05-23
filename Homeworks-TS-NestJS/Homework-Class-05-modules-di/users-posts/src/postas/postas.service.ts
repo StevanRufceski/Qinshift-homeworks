@@ -68,11 +68,13 @@ export class PostasService {
         };
         this.postas.push(newPosta);
         // add newPosta to user
-        console.log('Appending to ownpostasids:', theUser.ownpostasids, newPosta.id);
         theUser.ownpostasids.push(newPosta.id)
+        console.log(theUser);
         this.usersService.update(body.authorId, {
-            ...theUser,
-            ownpostasids: [...theUser.ownpostasids, newPosta.id],
+            name: theUser.name,
+            email: theUser.email,
+            role: theUser.role,
+            ownpostasids: theUser.ownpostasids,
         });
         // 
         return newPosta;
@@ -109,13 +111,12 @@ export class PostasService {
             throw new BadRequestException(`You must enter an existing User id`);
         }
         theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].id);
-        const updatedUser = this.usersService.update(this.postas[postaIndex].authorId, {
+        this.usersService.update(this.postas[postaIndex].authorId, {
             name: theUser.name,
             email: theUser.email,
             role: theUser.role,
             ownpostasids: theUser.ownpostasids,
         });
-        console.log('Updated user:', updatedUser);
         // 
         this.postas.splice(postaIndex, 1);
 

@@ -54,7 +54,7 @@ export class UsersService {
         this.users.push(newUser);
         return newUser;
     }
-    update(id: number, body: UpdateUserDto): UserDto {
+    update(id: number, body: UpdateUserDto | UserDto): UserDto {
         const userIndex = this.users.findIndex(
             (user) => user.id === id,
         );
@@ -62,7 +62,7 @@ export class UsersService {
         if (userIndex < 0) {
             throw new NotFoundException(`User with ID: ${id} is not found`);
         }
-        const updatedUser = {
+        const updatedUser: UserDto =  {
             ...this.users[userIndex],
             ...body,
             id,
