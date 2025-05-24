@@ -70,7 +70,7 @@ export class PostasService {
         // add newPosta to user
         theUser.ownpostasids.push(newPosta.id)
         console.log(theUser);
-        this.usersService.update(body.authorId, {
+        this.usersService.update(theUser.id, {
             name: theUser.name,
             email: theUser.email,
             role: theUser.role,
@@ -111,7 +111,7 @@ export class PostasService {
             throw new BadRequestException(`You must enter an existing User id`);
         }
         theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].id);
-        this.usersService.update(this.postas[postaIndex].authorId, {
+        this.usersService.update(theUser.id, {
             name: theUser.name,
             email: theUser.email,
             role: theUser.role,
