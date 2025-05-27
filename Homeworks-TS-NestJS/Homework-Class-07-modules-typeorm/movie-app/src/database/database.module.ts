@@ -17,9 +17,9 @@ import { Movie } from '../movies/entities/movie.entity';
         entities: [Movie],
         synchronize: configService.get('DB_HOST') !== 'production', // true
       }),
-      
+
       inject: [ConfigService],
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }
