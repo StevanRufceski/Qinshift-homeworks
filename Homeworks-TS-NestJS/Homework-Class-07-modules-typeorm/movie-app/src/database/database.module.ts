@@ -13,7 +13,7 @@ import { Movie } from '../movies/entities/movie.entity';
         port: configService.get('DB_PORT'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
+        database: configService.get('DB_DATABASE'),
         entities: [Movie],
         synchronize: configService.get('DB_HOST') !== 'production', // true
       }),
