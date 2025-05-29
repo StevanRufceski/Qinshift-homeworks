@@ -1,30 +1,30 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { UserDto, CreateUserDto, UpdateUserDto } from 'src/users/dto/users.dto';
-
+import { UserDto, CreateUserDto, UpdateUserDto, UserDetailsDto } from 'src/users/dto/users.dto';
+import { PostasService } from 'src/postas/postas.service';
 
 @Injectable()
 export class UsersService {
+        constructor(private readonly postasService: PostasService) { }
+        
+    
     private users: UserDto[] = [
         {
             id: 1,
             name: 'oneuser',
             email: 'oneuser@getMaxListeners.com',
             role: 'supervisor',
-            ownpostasids: [1],
         },
         {
             id: 2,
             name: 'twouser',
             email: 'twouser@getMaxListeners.com',
             role: 'operator',
-            ownpostasids: [2]
         },
         {
             id: 3,
             name: 'threeuser',
             email: 'threeser@getMaxListeners.com',
             role: 'buyer',
-            ownpostasids: []
         }
     ];
     findAll(): UserDto[] {
@@ -39,6 +39,22 @@ export class UsersService {
         }
         return user;
     }
+
+      userDetails(id: number): UserDetailsDto {
+    // Find the product
+    const user = this.findOne(id);
+
+    // Get orders count
+    const postasList = this.postasService.filterPostasByAuthorId(id);
+
+    // Attach the orders count
+
+    return {
+      ...user,
+      postasList,
+    } satisfies UserDetailsDto;
+  }
+
     create(body: CreateUserDto): UserDto {
         if ((!body.name) || (!body.email) || (!body.role)) {
             throw new BadRequestException(`You must enter all properties for User`)

@@ -1,10 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PostaDto, CreatePostaDto, UpdatePostaDto } from 'src/postas/dto/postas.dto';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class PostasService {
-    constructor(private readonly usersService: UsersService) { }
+    constructor(@Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService) { }
     private postas: PostaDto[] = [
         {
             id: 1,
@@ -67,16 +67,6 @@ export class PostasService {
             id: this.postas.length + 1,
         };
         this.postas.push(newPosta);
-        // add newPosta to user
-        theUser.ownpostasids.push(newPosta.id)
-        console.log(theUser);
-        this.usersService.update(theUser.id, {
-            name: theUser.name,
-            email: theUser.email,
-            role: theUser.role,
-            ownpostasids: theUser.ownpostasids,
-        });
-        // 
         return newPosta;
     }
 
@@ -104,22 +94,7 @@ export class PostasService {
         if (postaIndex < 0) {
             throw new NotFoundException(`Posta with ID: ${id} is not found`);
         }
-
-        // remove newPosta from user
-        const theUser = this.usersService.findOne(this.postas[postaIndex].authorId);
-        if (!theUser) {
-            throw new BadRequestException(`You must enter an existing User id`);
-        }
-        theUser.ownpostasids = theUser.ownpostasids.filter(id => id !== this.postas[postaIndex].id);
-        this.usersService.update(theUser.id, {
-            name: theUser.name,
-            email: theUser.email,
-            role: theUser.role,
-            ownpostasids: theUser.ownpostasids,
-        });
-        // 
         this.postas.splice(postaIndex, 1);
-
     }
 
 }
