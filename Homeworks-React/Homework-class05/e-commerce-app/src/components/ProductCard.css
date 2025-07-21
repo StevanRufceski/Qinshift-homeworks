@@ -21,34 +21,39 @@
 }
 
 .product-content {
-  padding: 1rem;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
   gap: 0.6rem;
   flex: 1;
+  height: 180px; /* total height for title + description */
 }
 
 .product-title {
+  margin: 0 0 0.3rem 0;
+  flex-shrink: 0; /* prevent shrinking */
   font-size: 1.1rem;
   font-weight: 600;
   color: #333;
-  margin: 0;
 }
 
 .product-description {
-  font-size: 0.9rem;
-  color: #555;
-  line-height: 1.4;
-  height: 80px;
-  overflow-y: auto;
+  flex-grow: 1;       /* fill remaining space */
+  overflow-y: auto;   /* vertical scroll if needed */
+  margin: 0;
   padding-right: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #555;
 }
 
 .product-details {
+  margin-top: auto; /* push details to bottom */
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   font-size: 0.9rem;
+  margin-bottom: 0;
 }
 
 .product-rating {
