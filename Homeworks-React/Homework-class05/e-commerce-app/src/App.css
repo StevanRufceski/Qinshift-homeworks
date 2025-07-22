@@ -4,6 +4,10 @@
   max-width: 800px;
 }
 
+main {
+  padding-top: 80px; /* match height of nav */
+}
+
 h4 {
   position: fixed;           
   top: 50%;

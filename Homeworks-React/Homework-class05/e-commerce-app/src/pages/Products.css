@@ -1,3 +1,14 @@
+
+.promo {
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.promo h1,
+.promo p {
+    text-align: center;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 2rem;
@@ -19,3 +30,4 @@ h2 {
   color: #777;
   margin-top: 2rem;
 }
+

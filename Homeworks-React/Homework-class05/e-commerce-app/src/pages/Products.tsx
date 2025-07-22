@@ -7,7 +7,9 @@ export const Products = () => {
     const context = useContext(ProductsContext);
     return (
         <>
-            <h1>All products</h1>
+            <section className="promo">
+                <h1>All products</h1>
+            </section>
             {context.products.length > 0 ? (
                 <ul>
                     {context.products.map((product) => {
