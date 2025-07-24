@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Products } from '../pages/Products'
 
-export function AppContent() {
+export function AppLoader() {
   const { isLoading: productsLoading, error: productsError } = useContext(ProductsContext)
   const { isLoading: categoriesLoading, error: categoriesError } = useContext(CategoriesContext)
 
