@@ -10,10 +10,13 @@ const fetchProducts = async () => {
 
 interface ProductsContext {
   products: Product[];
+  isLoading: boolean;
+  error?: string;
 }
 
 const initialValues: ProductsContext = {
   products: [],
+  isLoading: true
 };
 
 export const ProductsContext = createContext(initialValues);
@@ -34,10 +37,8 @@ export const ProductsContextProvider = (props: ProductsContextProviderProps) => 
         setIsLoading(true);
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts.data);
-        console.log("PRODUCTS", products);
-
       } catch (error) {
-        console.error("ERROR HAPPENED", error);
+        console.error("ERROR FETCHING PRODUCTS", error);
         setError("Failed to fetch products, please try again later.");
       } finally {
         setIsLoading(false);
@@ -45,20 +46,12 @@ export const ProductsContextProvider = (props: ProductsContextProviderProps) => 
     })();
   }, []);
 
-  if (isLoading) {
-    return <h4>Loading ...</h4>;
-  }
-
-  if (error) {
-    return (
-      <h2 style={{ color: "red" }}>{error}</h2>
-    );
-  }
-
   return (
     <ProductsContext.Provider
       value={{
         products: products,
+        isLoading: isLoading,
+        error: error,
       }}
     >
       {props.children}

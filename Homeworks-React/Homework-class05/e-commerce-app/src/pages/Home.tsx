@@ -1,15 +1,14 @@
-import './Home.css';
+import './Home.css'
 import { useContext, useState } from 'react';
 import { ProductsContext } from '../context/products.context';
+import { CategoriesContext } from '../context/categories.context';
+import { CategoryProducts } from '../components/CategoryProducts';
 import { ProductCard } from '../components/ProductCard';
 
 export const Home = () => {
-    const { products } = useContext(ProductsContext);
-    const categories = [...new Set(products.map(product => product.category))];
-
+    const {categories} = useContext(CategoriesContext);
+    const {products} = useContext(ProductsContext);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-    const filteredProducts = selectedCategory ? products.filter(product => product.category === selectedCategory) : products;
 
     return (
         <>
@@ -45,13 +44,12 @@ export const Home = () => {
                 </aside>
 
                 <section className="product-grid">
-                    {filteredProducts.length > 0 ? (
-                        filteredProducts.map(product => (
-                            <ProductCard key={product.id} product={product} />
-                        ))
+                    {selectedCategory ? (
+                        <CategoryProducts category={selectedCategory} />
                     ) : (
-                        <h2>No products found for this category.</h2>
-                    )}
+                        products.map(product => (
+                            <ProductCard key={product.id} product={product} />
+                        ))                    )}
                 </section>
             </div>
         </>

@@ -17,6 +17,15 @@ h1 {
 
 .content {
     display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.product-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .sidebar {
@@ -52,10 +61,6 @@ h1 {
     color: white;
 }
 
-.product-grid {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding-left: 20px;
-}
+
+
+

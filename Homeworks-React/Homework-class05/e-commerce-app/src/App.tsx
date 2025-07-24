@@ -1,9 +1,8 @@
 import './App.css'
-import { Navigation } from './components/Navigation'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import {Home} from './pages/Home'
-import {Products} from './pages/Products'
+import { BrowserRouter } from 'react-router-dom'
 import { ProductsContextProvider } from './context/products.context'
+import { CategoriesContextProvider } from './context/categories.context'
+import { AppContent } from './components/AppLoader'
 
 
 function App() {
@@ -11,17 +10,15 @@ function App() {
   return (
     <main>
       <BrowserRouter>
-      <ProductsContextProvider>
-        <Navigation />
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/products' element={<Products/>} />
-        </Routes>
+        <ProductsContextProvider>
+          <CategoriesContextProvider>
+            <AppContent />
+          </CategoriesContextProvider>
         </ProductsContextProvider>
       </BrowserRouter>
     </main>
   )
-  
+
 }
 
 export default App

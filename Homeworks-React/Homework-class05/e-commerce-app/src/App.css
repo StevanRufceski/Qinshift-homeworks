@@ -5,7 +5,8 @@
 }
 
 main {
-  padding-top: 80px; /* match height of nav */
+  padding-top: 80px;
+  width: 100%;
 }
 
 h4 {
