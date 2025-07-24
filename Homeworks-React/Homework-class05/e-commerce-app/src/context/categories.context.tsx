@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import type { Category } from "../types/category.type";
 import axios from "axios";
-const FAKE_STORE_API_URL = "https://fakestoreapi.com/products/categores";
+const FAKE_STORE_API_URL = "https://fakestoreapi.com/products/categories";
 
 const fetchCategories = async () => {
   const response = await axios.get(FAKE_STORE_API_URL);
