@@ -73,7 +73,7 @@ export const AddProduct = () => {
                     {...register("title", { required: true, minLength: 3 })}
                 />
                 {errors.title && (
-                    <div>This field is required and must be at least 3 characters long</div>
+                    <div className="error">This field is required and must be at least 3 characters long</div>
                 )}
             </label>
 
@@ -88,7 +88,7 @@ export const AddProduct = () => {
                     })}
                 />
                 {errors.description && (
-                    <div>This field is required and must be between 10 and 500 characters</div>
+                    <div className="error">This field is required and must be between 10 and 500 characters</div>
                 )}
             </label>
 
@@ -102,13 +102,13 @@ export const AddProduct = () => {
                         </option>
                     ))}
                 </select>
-                {errors.category && <div>Please select a category</div>}
+                {errors.category && <div className="error">Please select a category</div>}
             </label>
 
             <label htmlFor="image">
                 Image URL:
                 <input type="text" {...register("image", { required: true })} />
-                {errors.image && <div>This field is required</div>}
+                {errors.image && <div className="error">This field is required</div>}
             </label>
 
             <label htmlFor="price">
@@ -119,7 +119,7 @@ export const AddProduct = () => {
                     {...register("price", { required: true, min: 0 })}
                 />
                 {errors.price && (
-                    <div>This field is required and must be a positive number</div>
+                    <div className="error">This field is required and must be a positive number</div>
                 )}
             </label>
 
@@ -128,10 +128,10 @@ export const AddProduct = () => {
                 <input
                     type="number"
                     step="0.1"
-                    {...register("rate", { required: true, min: 0 })}
+                    {...register("rate", { required: true, min: 1, max: 5 })}
                 />
                 {errors.rate && (
-                    <div>This field is required and must be a positive number</div>
+                    <div className="error">This field is required and must be between 1 and 5</div>
                 )}
             </label>
 
@@ -142,7 +142,7 @@ export const AddProduct = () => {
                     {...register("count", { required: true, min: 0 })}
                 />
                 {errors.count && (
-                    <div>This field is required and must be a positive number</div>
+                    <div className="error">This field is required and must be a positive number</div>
                 )}
             </label>
 

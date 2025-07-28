@@ -30,21 +30,35 @@ export const CategoriesContextProvider = (props: CategoriesContextProviderProps)
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setError(undefined);
-        setIsLoading(true);
-        const fetchedCategories = await fetchCategories();
-        setCategories(fetchedCategories.data);
-      } catch (error) {
-        console.error("ERROR FETCHING CATEGORIES", error);
-        setError("Failed to fetch categories, please try again later.");
-      } finally {
-        setIsLoading(false);
+useEffect(() => {
+  (async () => {
+    try {
+      setError(undefined);
+      setIsLoading(true);
+
+      const fetchedCategories = await fetchCategories();
+      const data = fetchedCategories.data;
+
+      if (!Array.isArray(data)) {
+        throw new Error("Error while fetching categories");
       }
-    })();
-  }, []);
+
+      if (data.length === 0) {
+        throw new Error("No products available");
+      }
+
+      setCategories(data);
+    } catch (error) {
+      console.error("ERROR FETCHING CATEGORIES", error);
+      setError(
+        error instanceof Error ? error.message : "Unknown error occurred"
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  })();
+}, []);
+
 
   return (
     <CategoriesContext.Provider

@@ -11,7 +11,7 @@ export const Products = () => {
                 <h1>All products</h1>
             </section>
             {context.products.length > 0 ? (
-                <ul>
+                <section className="product-grid">
                     {context.products.map((product) => {
                         return (
                             <ProductCard
@@ -20,7 +20,7 @@ export const Products = () => {
                             />
                         );
                     })}
-                </ul>
+                </section>
             ) : (
                 <h2>There are no products in the list.</h2>
             )}

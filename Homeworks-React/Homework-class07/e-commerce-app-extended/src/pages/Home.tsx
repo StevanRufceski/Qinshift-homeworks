@@ -2,7 +2,6 @@ import './Home.css'
 import { useContext, useState } from 'react';
 import { ProductsContext } from '../context/products.context';
 import { CategoriesContext } from '../context/categories.context';
-import { CategoryProducts } from '../components/CategoryProducts';
 import { ProductCard } from '../components/ProductCard';
 
 export const Home = () => {
@@ -45,7 +44,9 @@ export const Home = () => {
 
                 <section className="product-grid">
                     {selectedCategory ? (
-                        <CategoryProducts category={selectedCategory} />
+                        products.filter(product => product.category === selectedCategory).map(product => (
+                            <ProductCard key={product.id} product={product} />
+                        )) 
                     ) : (
                         products.map(product => (
                             <ProductCard key={product.id} product={product} />
