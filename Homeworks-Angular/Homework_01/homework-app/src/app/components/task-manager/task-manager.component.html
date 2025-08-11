@@ -1,23 +1,17 @@
 <div>
-    <h4>List of tasks</h4>
+  <h4>List of tasks</h4>
 
-    <ul>
-        <!-- Toggle Button -->
-        <button (click)="toggleCreateForm()">
-            {{ showCreateForm ? 'Cancel' : 'Create New Task' }}
-        </button>
+  <button (click)="toggleCreateForm()">
+    {{ showCreateForm ? 'Cancel' : 'Create New Task' }}
+  </button>
 
-        <!-- Conditionally render the form -->
-        @if (showCreateForm) {
-        <create-task (taskCreated)="handleTaskCreated($event)"></create-task>
-        }
-        <br />
-         <br />
-        @for (task of tasks; track task.id) {
-        <li>
-            {{ $index+1 }} - {{ task.title }} - {{ task.description }} - {{ task.isCompleted ? "Completed" : "Pending"
-            }} @if (!task.isCompleted) {- <button (click)="taskCompletion(task.id)">Mark completed</button>}
-        </li>
-        }
-    </ul>
+  <create-task
+    *ngIf="showCreateForm"
+    (taskCreated)="handleTaskCreated($event)">
+  </create-task>
+
+  <display-tasks
+    [tasks]="tasks"
+    (taskCompleted)="handleTaskCompleted($event)">
+  </display-tasks>
 </div>

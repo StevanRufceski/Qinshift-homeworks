@@ -3,15 +3,14 @@
   <form (ngSubmit)="createNewTask()">
     <label>
       Title:
-      <input [(ngModel)]="title" name="title" required />
+      <input [(ngModel)]="title" name="title" />
     </label>
     <br />
     <label>
       Description:
-      <input [(ngModel)]="description" name="description" required />
+      <input [(ngModel)]="description" name="description" />
     </label>
-    <br />
-    <br />
+    <br /><br />
     <button type="submit">Add Task</button>
   </form>
 </div>
