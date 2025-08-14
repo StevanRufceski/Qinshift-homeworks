@@ -1,0 +1,8 @@
+@for (todo of todos; track todo.id) {
+  <div class="todo-card">
+    <h2>{{ todo.title }}</h2>
+    <p>{{ todo.description }}</p>
+    <p>Status: {{ todo.status }}</p>
+    <hr />
+  </div>
+}
