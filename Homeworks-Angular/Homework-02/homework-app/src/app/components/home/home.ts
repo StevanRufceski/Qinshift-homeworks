@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { TodosService } from '../../services/todos-service';
 import { Todo } from '../../types/todo.type';
+import { TodoDetailsComponent } from '../todo-details/todo-details';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [TodoDetailsComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit {
-  todos: Todo[] = [];
+  todos = signal<Todo[]>([]);
+  selectedTodo = signal<Todo | null>(null);
 
-  constructor(private todosService: TodosService) {}
+  constructor(private todosService: TodosService) { }
 
   ngOnInit(): void {
     this.todosService.readAllTodos().subscribe(todos => {
-      this.todos = todos;
-      console.log(todos); // You will see todos in console
+      this.todos.set(todos);
     });
+  }
+
+  selectTodo(todo: Todo) {
+    this.selectedTodo.set(todo);
   }
 }

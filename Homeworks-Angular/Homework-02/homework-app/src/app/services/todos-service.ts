@@ -29,9 +29,14 @@ const TODOS: Todo[] = [
 })
 export class TodosService {
   private _todos = new BehaviorSubject(TODOS); // niza vrz koja kje vrsime manipulaciija
-  todos$ = this._todos.asObservable(); // niza koja kje go prikazuva krajniot rezultat od manipilacijata so todos
+  public readonly todos$: Observable<Todo[]> = this._todos.asObservable(); // niza koja kje go prikazuva krajniot rezultat od manipilacijata so todos
 
   readAllTodos(): Observable<Todo[]> {
     return this.todos$;
   }
+
+  //   getTodoById(id: string): Todo | undefined {
+  //   const todos = this._todos.getValue();
+  //   return todos.find((t) => t.id === id);
+  // }
 }

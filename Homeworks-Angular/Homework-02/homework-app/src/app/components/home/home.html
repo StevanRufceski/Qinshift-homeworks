@@ -1,8 +1,25 @@
-@for (todo of todos; track todo.id) {
-  <div class="todo-card">
-    <h2>{{ todo.title }}</h2>
+@if (selectedTodo()) {
+  <app-todo-details [todo]="selectedTodo()!" />
+}
+
+@for (todo of todos(); track todo.id) {
+  <div (click)="selectTodo(todo)" style="cursor: pointer;">
+    <h2>{{ todo.id }} - {{ todo.title }}</h2>
     <p>{{ todo.description }}</p>
     <p>Status: {{ todo.status }}</p>
     <hr />
   </div>
 }
+
+<!-- @if (selectedTodo(); as todo) {
+  <app-todo-details [todo]="todo" />
+} @else {
+  @for (todo of todos(); track todo.id) {
+    <div (click)="selectTodo(todo)" style="cursor: pointer;">
+      <h2>{{ todo.id }} - {{ todo.title }}</h2>
+      <p>{{ todo.description }}</p>
+      <p>Status: {{ todo.status }}</p>
+      <hr />
+    </div>
+  }
+} -->
