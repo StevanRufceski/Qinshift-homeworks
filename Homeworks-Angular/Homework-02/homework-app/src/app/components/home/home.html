@@ -1,5 +1,5 @@
 @if (selectedTodo()) {
-  <app-todo-details [todo]="selectedTodo()!" />
+  <app-todo-details #detailsRef [todo]="selectedTodo()!" />
 }
 
 @for (todo of todos(); track todo.id) {
@@ -10,16 +10,3 @@
     <hr />
   </div>
 }
-
-<!-- @if (selectedTodo(); as todo) {
-  <app-todo-details [todo]="todo" />
-} @else {
-  @for (todo of todos(); track todo.id) {
-    <div (click)="selectTodo(todo)" style="cursor: pointer;">
-      <h2>{{ todo.id }} - {{ todo.title }}</h2>
-      <p>{{ todo.description }}</p>
-      <p>Status: {{ todo.status }}</p>
-      <hr />
-    </div>
-  }
-} -->
