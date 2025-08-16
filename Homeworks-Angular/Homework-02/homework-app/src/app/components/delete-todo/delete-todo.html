@@ -1,0 +1,10 @@
+<div>
+  <h2>{{ todo()!.id }} - {{ todo()!.title }}</h2>
+  <p>{{ todo()!.description }}</p>
+  <p>Status: {{ todo()!.status }}</p>
+  <h2>Are you sure you want to delete this todo?</h2>
+  <button (click)="handleDelete()">Delete</button>
+  <button (click)="handleCancel()">Cancel</button>
+  <hr />
+</div>
+

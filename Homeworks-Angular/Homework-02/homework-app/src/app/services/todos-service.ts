@@ -22,6 +22,24 @@ const TODOS: Todo[] = [
     description: 'Description 3',
     status: TodoStatus.COMPLETED,
   },
+  {
+    id: '4',
+    title: 'Title 4',
+    description: 'Description 4',
+    status: TodoStatus.PENDING,
+  },
+  {
+    id: '5',
+    title: 'Title 5',
+    description: 'Description 5',
+    status: TodoStatus.IN_PROGRESS,
+  },
+  {
+    id: '6',
+    title: 'Title 6',
+    description: 'Description 6',
+    status: TodoStatus.COMPLETED,
+  }
 ];
 
 @Injectable({
@@ -35,8 +53,11 @@ export class TodosService {
     return this.todos$;
   }
 
-  //   getTodoById(id: string): Todo | undefined {
-  //   const todos = this._todos.getValue();
-  //   return todos.find((t) => t.id === id);
-  // }
+  deleteTodo(id: string): void {
+    const currentTodos = this._todos.getValue();
+    const updatedTodos = currentTodos.filter(todo => todo.id !== id);
+    this._todos.next(updatedTodos);
+  }
+
+
 }

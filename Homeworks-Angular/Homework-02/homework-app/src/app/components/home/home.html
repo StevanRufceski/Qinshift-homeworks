@@ -1,5 +1,8 @@
-@if (selectedTodo()) {
-  <app-todo-details #detailsRef [todo]="selectedTodo()!" />
+@if (selectedTodo() != null) {
+  <app-delete-todo 
+  [todo]="selectedTodo()!"
+  [cancelTodo]="clearSelectedTodo"
+  />
 }
 
 @for (todo of todos(); track todo.id) {
