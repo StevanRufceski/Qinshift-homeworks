@@ -59,5 +59,14 @@ export class TodosService {
     this._todos.next(updatedTodos);
   }
 
+  updateTodoStatus(id: string, newStatus: TodoStatus): void {
+    const currentTodos = this._todos.getValue();
+    const updatedTodos = currentTodos.map(todo =>
+      todo.id === id ? { ...todo, status: newStatus } : todo
+    );
+    this._todos.next(updatedTodos);
+  }
+
+
 
 }

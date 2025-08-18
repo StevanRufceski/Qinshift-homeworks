@@ -1,15 +1,21 @@
-@if (selectedTodo() != null) {
-  <app-delete-todo 
-  [todo]="selectedTodo()!"
-  [cancelTodo]="clearSelectedTodo"
-  />
+@if (selectedTodoToDelete() != null) {
+<app-delete-todo [todo]="selectedTodoToDelete()!" [cancelTodo]="clearSelectedTodoToDelete" />
 }
 
 @for (todo of todos(); track todo.id) {
-  <div (click)="selectTodo(todo)" style="cursor: pointer;">
-    <h2>{{ todo.id }} - {{ todo.title }}</h2>
-    <p>{{ todo.description }}</p>
-    <p>Status: {{ todo.status }}</p>
-    <hr />
-  </div>
+<div>
+  <h2>{{ todo.id }} - {{ todo.title }} -
+    <button (click)="selectTodoToDelete(todo)">Delete</button>
+  </h2>
+  <p>{{ todo.description }}</p>
+  <p>
+    Status: {{ todo.status }}
+    <button (click)="selectTodoToChangeStatus(todo)">Change Status</button>
+
+    @if (selectedTodoToChangeStatus()?.id === todo.id) {
+    <app-todo-status [todo]="selectedTodoToChangeStatus()!" [cancelTodo]="clearSelectedTodoToChangeStatus" />
+    }
+  </p>
+  <hr />
+</div>
 }

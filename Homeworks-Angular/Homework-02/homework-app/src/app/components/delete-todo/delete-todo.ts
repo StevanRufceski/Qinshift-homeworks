@@ -12,7 +12,6 @@ export class DeleteTodoComponent {
   todo = input.required<Todo>();
 
   cancelTodo = input<() => void>(() => { });
-
   handleCancel = () => {
     this.cancelTodo()(); 
   }
