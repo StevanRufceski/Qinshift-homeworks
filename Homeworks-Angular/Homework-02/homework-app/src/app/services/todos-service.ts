@@ -67,6 +67,17 @@ export class TodosService {
     this._todos.next(updatedTodos);
   }
 
+  addTodo(title: string, description: string) {
+    const newTodo: Todo = {
+      id: uuid(),
+      title,
+      description,
+      status: TodoStatus.PENDING,
+    };
+    const todos = this._todos.value; // will consume the values of the subject up to that moment
+    this._todos.next([...todos, newTodo]);
+  }
+
 
 
 }
