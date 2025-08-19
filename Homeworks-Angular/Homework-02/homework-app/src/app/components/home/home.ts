@@ -6,6 +6,7 @@ import { TodoStatusComponent } from '../todo-status/todo-status';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [DeleteTodoComponent, TodoStatusComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'

@@ -4,6 +4,7 @@ import { TodosService } from '../../services/todos-service';
 
 @Component({
   selector: 'app-delete-todo',
+  standalone: true,
   imports: [],
   templateUrl: './delete-todo.html',
   styleUrl: './delete-todo.css'
