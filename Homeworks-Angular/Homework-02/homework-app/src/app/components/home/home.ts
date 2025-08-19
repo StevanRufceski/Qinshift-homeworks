@@ -3,11 +3,12 @@ import { TodosService } from '../../services/todos-service';
 import { Todo } from '../../types/todo.type';
 import { DeleteTodoComponent } from '../delete-todo/delete-todo';
 import { TodoStatusComponent } from '../todo-status/todo-status';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DeleteTodoComponent, TodoStatusComponent],
+  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -42,5 +43,19 @@ export class HomeComponent implements OnInit {
   clearSelectedTodoToChangeStatus = () => {
     this.selectedTodoToChangeStatus.set(null);
   }
+
+  getStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'completed':
+        return 'status-completed';
+      case 'pending':
+        return 'status-pending';
+      case 'in progress':
+        return 'status-in-progress';
+      default:
+        return '';
+    }
+  }
+
 
 }

@@ -4,7 +4,8 @@
 
 <div class="home-container">
   @for (todo of todos(); track todo.id) {
-    <div class="home-div">
+    <!-- <div class="home-div"> -->
+    <div class="home-div" [ngClass]="getStatusClass(todo.status)">
       <h2>{{ todo.id }} - {{ todo.title }} -
         <button (click)="selectTodoToDelete(todo)">Delete</button>
       </h2>

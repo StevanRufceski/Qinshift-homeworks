@@ -24,3 +24,16 @@
   background-color: #c1c6d2;
 }
 
+.status-completed {
+  background-color: #86ea9d; /* light green */
+}
+
+.status-pending {
+  background-color: #f5e38c; /* light orange */
+}
+
+.status-in-progress {
+  background-color: #93abe7; /* light blue */
+}
+
+
