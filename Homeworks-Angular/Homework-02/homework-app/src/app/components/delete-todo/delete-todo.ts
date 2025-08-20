@@ -14,13 +14,13 @@ export class DeleteTodoComponent {
 
   cancelTodo = input<() => void>(() => { });
   handleCancel = () => {
-    this.cancelTodo()(); 
+    this.cancelTodo()();
   }
 
-  private todosService = inject(TodosService); // inject the service
+  private todosService = inject(TodosService);
   handleDelete = () => {
-    this.todosService.deleteTodo(this.todo().id); // delete the todo
-    this.handleCancel(); // close the component after deletion
+    this.todosService.deleteTodo(this.todo().id);
+    this.handleCancel();
   }
 
 }

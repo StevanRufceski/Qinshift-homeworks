@@ -25,15 +25,26 @@
 }
 
 .status-completed {
-  background-color: #86ea9d; /* light green */
+  background-color: #40dc65;
 }
 
 .status-pending {
-  background-color: #f5e38c; /* light orange */
+  background-color: #ecaa58;
 }
 
 .status-in-progress {
-  background-color: #93abe7; /* light blue */
+  background-color: #6386de;
 }
 
+.search-bar {
+  padding: 16px;
+  text-align: center;
+}
 
+.search-bar input {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
