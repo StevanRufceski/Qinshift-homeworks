@@ -17,12 +17,12 @@ export class TodoStatusComponent {
     this.cancelTodo()();
   }
 
-  private todosService = inject(TodosService); // inject the service
+  private todosService = inject(TodosService);
   handleChangeStatus = (id: string, newStatus: TodoStatus): void => {
     this.todosService.updateTodoStatus(id, newStatus);
     this.handleCancel();
   };
 
-  readonly TodoStatus = TodoStatus;
+  readonly TodoStatus = TodoStatus; // go pravime javno TodoStatus
 
 }

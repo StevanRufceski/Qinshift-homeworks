@@ -1,14 +1,15 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { TodosService } from '../../services/todos-service';
 import { Todo } from '../../types/todo.type';
 import { DeleteTodoComponent } from '../delete-todo/delete-todo';
 import { TodoStatusComponent } from '../todo-status/todo-status';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule],
+  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -50,12 +51,21 @@ export class HomeComponent implements OnInit {
         return 'status-completed';
       case 'pending':
         return 'status-pending';
-      case 'in progress':
+      case 'in_progress':
         return 'status-in-progress';
       default:
         return '';
     }
   }
+
+  searchTerm = signal(''); 
+  filteredTodos = computed(() => {
+    const search = this.searchTerm().trim().toLowerCase(); 
+    return this.todos().filter(todo =>
+      todo.title.toLowerCase().includes(search)
+    );
+  });
+
 
 
 }

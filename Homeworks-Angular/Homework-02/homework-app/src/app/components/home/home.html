@@ -1,24 +1,29 @@
+<div class="search-bar">
+  <input type="text" placeholder="Search todos by title..." [ngModel]="searchTerm()"
+    (ngModelChange)="searchTerm.set($event)" />
+
+</div>
+
 @if (selectedTodoToDelete() != null) {
 <app-delete-todo [todo]="selectedTodoToDelete()!" [cancelTodo]="clearSelectedTodoToDelete" />
 }
 
 <div class="home-container">
-  @for (todo of todos(); track todo.id) {
-    <!-- <div class="home-div"> -->
-    <div class="home-div" [ngClass]="getStatusClass(todo.status)">
-      <h2>{{ todo.id }} - {{ todo.title }} -
-        <button (click)="selectTodoToDelete(todo)">Delete</button>
-      </h2>
-      <p>{{ todo.description }}</p>
-      <p>
-        Status: {{ todo.status }}
-        <button (click)="selectTodoToChangeStatus(todo)">Change Status</button>
+  @for (todo of filteredTodos(); track todo.id) {
+  <div class="home-div" [ngClass]="getStatusClass(todo.status)">
+    <h2>{{ todo.id }} - {{ todo.title }} -
+      <button (click)="selectTodoToDelete(todo)">Delete</button>
+    </h2>
+    <p>{{ todo.description }}</p>
+    <p>
+      Status: {{ todo.status }}
+      <button (click)="selectTodoToChangeStatus(todo)">Change Status</button>
 
-        @if (selectedTodoToChangeStatus()?.id === todo.id) {
-          <app-todo-status [todo]="selectedTodoToChangeStatus()!" [cancelTodo]="clearSelectedTodoToChangeStatus" />
-        }
-      </p>
-      <hr />
-    </div>
+      @if (selectedTodoToChangeStatus()?.id === todo.id) {
+      <app-todo-status [todo]="selectedTodoToChangeStatus()!" [cancelTodo]="clearSelectedTodoToChangeStatus" />
+      }
+    </p>
+    <hr />
+  </div>
   }
 </div>

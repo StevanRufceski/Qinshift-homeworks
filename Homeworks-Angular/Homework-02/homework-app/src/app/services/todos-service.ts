@@ -74,7 +74,7 @@ export class TodosService {
       description,
       status: TodoStatus.PENDING,
     };
-    const todos = this._todos.value; // will consume the values of the subject up to that moment
+    const todos = this._todos.value; // ke gi cita vrednostite na subjektot vo toj moment
     this._todos.next([...todos, newTodo]);
   }
 

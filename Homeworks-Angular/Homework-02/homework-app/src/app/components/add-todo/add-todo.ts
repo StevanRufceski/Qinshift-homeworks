@@ -13,24 +13,24 @@ import { Router } from '@angular/router';
 export class AddTodoComponent {
 
   constructor(
-    private readonly TodosService: TodosService, 
+    private readonly TodosService: TodosService,
     private readonly router: Router) { }
 
   title = signal('');
   description = signal('');
 
   handleSubmit() {
-  const trimmedTitle = this.title().trim();
-  const trimmedDescription = this.description().trim();
+    const trimmedTitle = this.title().trim();
+    const trimmedDescription = this.description().trim();
 
-  if (!trimmedTitle || !trimmedDescription) {
-    alert('Please fill in both title and description.');
-    return;
+    if (!trimmedTitle || !trimmedDescription) {
+      alert('Please fill in both title and description.');
+      return;
+    }
+
+    this.TodosService.addTodo(trimmedTitle, trimmedDescription);
+    this.handleGoToHomePage();
   }
-
-  this.TodosService.addTodo(trimmedTitle, trimmedDescription);
-  this.handleGoToHomePage();
-}
   handleGoToHomePage(): void {
     this.router.navigate(['/']);
   }
