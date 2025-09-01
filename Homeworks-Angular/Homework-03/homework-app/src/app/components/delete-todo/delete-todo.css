@@ -1,0 +1,22 @@
+div {
+    justify-self: center;
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+div h2 {
+    margin-top: 10px;
+    padding: 0;
+}
+
+div p {
+    margin-top: 10px;
+    padding: 0;
+}
+
+div button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
