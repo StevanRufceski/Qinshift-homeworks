@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {
   FormGroup,
-  ReactiveFormsModule,
-  FormControl,
   Validators,
+  NonNullableFormBuilder,
+  FormControl,
+  ReactiveFormsModule
 } from '@angular/forms';
 import { Todo, TodoStatus } from '../../types/todo.type';
 import { CommonModule } from '@angular/common';
@@ -13,51 +14,39 @@ import { TodosService } from '../../services/todos-service';
 
 @Component({
   selector: 'app-create-todo',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './create-todo.html',
-  styleUrl: './create-todo.css'
+  styleUrl: './create-todo.css',
 })
 export class CreateTodoComponent {
-  // Holds the root form state tree (group of controls)
-  myForm!: FormGroup;
+  myForm!: FormGroup<{
+    title: FormControl<string>;
+    description: FormControl<string>;
+    status: FormControl<TodoStatus>;
+  }>;
+
   todoStatusOptions: { key: string; value: TodoStatus }[] = [];
 
-  constructor(private todosService: TodosService, private router: Router) {}
-
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private todosService: TodosService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.todoStatusOptions = Object.entries(TodoStatus).map(([key, value]) => ({
       key,
       value: value as TodoStatus,
     }));
-    /**
-     * Manually constructing a FormGroup.
-     * Each FormControl: initial value + validators array.
-     * (In larger apps you'd usually use FormBuilder for terser syntax.)
-     */
-    this.myForm = new FormGroup(
+
+    this.myForm = this.fb.group(
       {
-        // firstName must be present & at least 5 chars
-        title: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(50),
-        ]),
-        // lastName required, min 3 chars
-        description: new FormControl('', [
-          Validators.required,
-          Validators.minLength(10),
-
-        ]),
-
-        // selectStatus: new FormControl(''),
-        status: new FormControl(
-          TodoStatus.PENDING,
-          Validators.required
-        ),
+        title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        description: ['', [Validators.required, Validators.minLength(10)]],
+        status: [TodoStatus.PENDING, Validators.required],
       },
       {
-        // Validation + valueChanges fire on each change (default); could be 'blur' or 'submit'
         updateOn: 'change',
       }
     );
@@ -66,7 +55,7 @@ export class CreateTodoComponent {
   onHandleSubmit() {
     if (this.myForm.invalid) return;
 
-    const formValues = this.myForm.value;
+    const formValues = this.myForm.getRawValue() as Todo;
 
     const newTodo: Todo = {
       ...formValues,
@@ -74,14 +63,9 @@ export class CreateTodoComponent {
     };
 
     this.todosService.createTodo(newTodo);
-
     this.router.navigate(['/']);
   }
 
-  /**
-   * Helper to centralize error message logic.
-   * Only returns a string if the control has the target error AND was touched.
-   */
   getErrorMessage(
     controlName: string,
     errorName: string,
@@ -96,7 +80,9 @@ export class CreateTodoComponent {
         case 'required':
           return `Enter: ${controlName}`;
         case 'minlength':
-          return `Enter more then ${minLengthRequired} characters`;
+          return `Enter more than ${minLengthRequired} characters`;
+        case 'maxlength':
+          return `Enter less than ${minLengthRequired} characters`;
         default:
           return null;
       }
@@ -104,10 +90,4 @@ export class CreateTodoComponent {
 
     return null;
   }
-
-
 }
-function uuid() {
-  throw new Error('Function not implemented.');
-}
-
