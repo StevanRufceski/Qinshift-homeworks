@@ -70,7 +70,16 @@ export class CreateTodoComponent {
     }, 3000);
   }
 
+  // onCancel(): void {
+  //   this.router.navigate(['/']);
+  // }
+
   onCancel(): void {
+    if (this.myForm.dirty && !this.isCreating) {
+      const confirmLeave = window.confirm('You have not created a new todo. Do you really want to leave?');
+      if (!confirmLeave) return;
+    }
+
     this.router.navigate(['/']);
   }
 

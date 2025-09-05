@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './edit-todo.scss',
   imports: [ReactiveFormsModule, CommonModule]
 })
-export class EditTodoComponent implements OnInit {
+export class EditTodoComponent {
   myForm!: FormGroup;
   todoId: string | null = null;
   todoNotFound = false;
@@ -79,12 +79,22 @@ export class EditTodoComponent implements OnInit {
       this.todosService.updateTodo(updatedTodo);
       this.isLoading = false;
       this.router.navigate(['/']);
-    }, 3000); 
+    }, 3000);
   }
 
+  // onCancel(): void {
+  //   this.router.navigate(['/']);
+  // }
+
   onCancel(): void {
+    if (this.myForm.dirty && !this.isLoading) {
+      const confirmLeave = window.confirm('You have unsaved changes. Do you really want to leave?');
+      if (!confirmLeave) return;
+    }
+
     this.router.navigate(['/']);
   }
+
 
   getErrorMessage(
     controlName: string,
