@@ -26,17 +26,17 @@ $padding: 16px;
         background-color: #c1c6d2;
       }
     }
+
+    &.status-completed {
+      background-color: #86ea9d;
+    }
+
+    &.status-pending {
+      background-color: #f5e38c;
+    }
+
+    &.status-in-progress {
+      background-color: #93abe7;
+    }
   }
-}
-
-.status-completed {
-  background-color: #86ea9d;
-}
-
-.status-pending {
-  background-color: #f5e38c;
-}
-
-.status-in-progress {
-  background-color: #93abe7;
 }
