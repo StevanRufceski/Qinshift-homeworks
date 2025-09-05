@@ -47,8 +47,14 @@ export class CreateTodoComponent {
     );
   }
 
+  isCreating = false;
   onHandleSubmit() {
     if (this.myForm.invalid) return;
+
+    const confirmed = window.confirm('Are you sure you want to create new todo?');
+    if (!confirmed) return;
+
+    this.isCreating = true;
 
     const formValues = this.myForm.value;
 
@@ -57,8 +63,11 @@ export class CreateTodoComponent {
       id: uuidv4(),
     };
 
-    this.todosService.createTodo(newTodo);
-    this.router.navigate(['/']);
+    setTimeout(() => {
+      this.todosService.createTodo(newTodo);
+      this.isCreating = false;
+      this.router.navigate(['/']);
+    }, 3000);
   }
 
   getErrorMessage(

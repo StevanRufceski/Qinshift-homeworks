@@ -58,6 +58,7 @@ $color-for-invalid-input: red;
 
   button {
     margin-top: 16px;
+    margin-right: 16px;
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
@@ -75,4 +76,8 @@ $color-for-invalid-input: red;
       opacity: 0.6;
     }
   }
+}
+.loading-text {
+  color: green;
+  font-weight: 600;
 }

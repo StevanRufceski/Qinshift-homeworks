@@ -1,54 +1,50 @@
 <div class="edit-form-card" *ngIf="!todoNotFound; else notFound">
-  <h2>Edit Todo</h2>
+    <h2>Edit Todo</h2>
 
-  <form [formGroup]="myForm" (ngSubmit)="onHandleSubmit()">
-    <label>
-      Title:
-      <input
-        type="text"
-        formControlName="title"
-        class="title"
-        placeholder="Enter title"
-      />
-    </label>
-    <span *ngIf="getErrorMessage('title', 'required')">
-      {{ getErrorMessage('title', 'required') }}
-    </span>
-    <span *ngIf="getErrorMessage('title', 'minlength', 3)">
-      {{ getErrorMessage('title', 'minlength', 3) }}
-    </span>
-    <span *ngIf="getErrorMessage('title', 'maxlength', 50)">
-      {{ getErrorMessage('title', 'maxlength', 50) }}
-    </span>
+    <form [formGroup]="myForm" (ngSubmit)="onHandleSubmit()">
+        <label>
+            Title:
+            <input type="text" formControlName="title" class="title" placeholder="Enter title" />
+        </label>
+        <span *ngIf="getErrorMessage('title', 'required')">
+            {{ getErrorMessage('title', 'required') }}
+        </span>
+        <span *ngIf="getErrorMessage('title', 'minlength', 3)">
+            {{ getErrorMessage('title', 'minlength', 3) }}
+        </span>
+        <span *ngIf="getErrorMessage('title', 'maxlength', 50)">
+            {{ getErrorMessage('title', 'maxlength', 50) }}
+        </span>
 
-    <label>
-      Description:
-      <textarea
-        formControlName="description"
-        class="description"
-        placeholder="Enter description"
-      ></textarea>
-    </label>
-    <span *ngIf="getErrorMessage('description', 'required')">
-      {{ getErrorMessage('description', 'required') }}
-    </span>
-    <span *ngIf="getErrorMessage('description', 'minlength', 10)">
-      {{ getErrorMessage('description', 'minlength', 10) }}
-    </span>
+        <label>
+            Description:
+            <textarea formControlName="description" class="description" placeholder="Enter description"></textarea>
+        </label>
+        <span *ngIf="getErrorMessage('description', 'required')">
+            {{ getErrorMessage('description', 'required') }}
+        </span>
+        <span *ngIf="getErrorMessage('description', 'minlength', 10)">
+            {{ getErrorMessage('description', 'minlength', 10) }}
+        </span>
 
-    <label>
-      Status:
-      <select formControlName="status">
-        <option *ngFor="let status of todoStatusOptions" [value]="status.value">
-          {{ status.key }}
-        </option>
-      </select>
-    </label>
+        <label>
+            Status:
+            <select formControlName="status">
+                <option *ngFor="let status of todoStatusOptions" [value]="status.value">
+                    {{ status.key }}
+                </option>
+            </select>
+        </label>
 
-    <button type="submit" [disabled]="myForm.invalid">Save</button>
-  </form>
+        <button type="submit" [disabled]="myForm.invalid || isLoading" [ngClass]="{ 'loading-text': isLoading }">
+            {{ isLoading ? 'Saving...' : 'Save' }}
+        </button>
+
+        <button type="button" (click)="onCancel()">Cancel</button>
+    </form>
+
 </div>
 
 <ng-template #notFound>
-  <p>Todo not found.</p>
+    <p>Todo not found.</p>
 </ng-template>

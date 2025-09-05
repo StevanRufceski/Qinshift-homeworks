@@ -28,7 +28,7 @@ export class EditTodoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private todosService: TodosService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.todoStatusOptions = Object.values(TodoStatus).map(value => ({
@@ -61,16 +61,28 @@ export class EditTodoComponent implements OnInit {
       }
     }
   }
-
+  isLoading = false;
   onHandleSubmit(): void {
     if (this.myForm.invalid || !this.todoId) return;
+
+    const confirmed = window.confirm('Are you sure you want to save the changes?');
+    if (!confirmed) return;
+
+    this.isLoading = true;
 
     const updatedTodo: Todo = {
       id: this.todoId,
       ...this.myForm.value
     };
 
-    this.todosService.updateTodo(updatedTodo);
+    setTimeout(() => {
+      this.todosService.updateTodo(updatedTodo);
+      this.isLoading = false;
+      this.router.navigate(['/']);
+    }, 3000); 
+  }
+
+  onCancel(): void {
     this.router.navigate(['/']);
   }
 
