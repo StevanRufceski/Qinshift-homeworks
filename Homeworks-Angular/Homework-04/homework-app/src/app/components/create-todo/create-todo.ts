@@ -70,6 +70,10 @@ export class CreateTodoComponent {
     }, 3000);
   }
 
+  onCancel(): void {
+    this.router.navigate(['/']);
+  }
+
   getErrorMessage(
     controlName: string,
     errorName: string,

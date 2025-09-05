@@ -2,14 +2,13 @@ import { Component, OnInit, signal } from '@angular/core';
 import { TodosService } from '../../services/todos-service';
 import { Todo } from '../../types/todo.type';
 import { DeleteTodoComponent } from '../delete-todo/delete-todo';
-import { TodoStatusComponent } from '../todo-status/todo-status';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule, RouterModule],
+  imports: [DeleteTodoComponent, CommonModule, RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -33,16 +32,6 @@ export class HomeComponent implements OnInit {
 
   clearSelectedTodoToDelete = () => {
     this.selectedTodoToDelete.set(null);
-  }
-
-  selectedTodoToChangeStatus = signal<Todo | null>(null);
-  selectTodoToChangeStatus(todo: Todo) {
-    this.selectedTodoToChangeStatus.set(todo);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  clearSelectedTodoToChangeStatus = () => {
-    this.selectedTodoToChangeStatus.set(null);
   }
 
   getStatusClass(status: string): string {

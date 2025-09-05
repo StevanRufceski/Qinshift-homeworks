@@ -6,19 +6,11 @@
   @for (todo of todos(); track todo.id) {
     <!-- <div class="home-div"> -->
     <div class="home-div" [ngClass]="getStatusClass(todo.status)">
-      <h2>{{ todo.id }} - {{ todo.title }} -
-        <button (click)="selectTodoToDelete(todo)">Delete</button>
-      </h2>
+      <h2>{{ todo.id }} - {{ todo.title }}</h2>
       <p>{{ todo.description }}</p>
-      <p>
-        Status: {{ todo.status }}
-        <button (click)="selectTodoToChangeStatus(todo)">Change Status</button>
-
-        @if (selectedTodoToChangeStatus()?.id === todo.id) {
-          <app-todo-status [todo]="selectedTodoToChangeStatus()!" [cancelTodo]="clearSelectedTodoToChangeStatus" />
-        }
-      </p>
+      <p>Status: {{ todo.status }}</p>
       <button [routerLink]="['/edit-todo', todo.id]">Edit</button>
+      <button (click)="selectTodoToDelete(todo)">Delete</button>
       <hr />
     </div>
   }

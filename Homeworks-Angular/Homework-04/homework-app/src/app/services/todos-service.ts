@@ -20,15 +20,6 @@ export class TodosService {
     const updatedTodos = currentTodos.filter(todo => todo.id !== id);
     this._todos.next(updatedTodos);
   }
-
-  updateTodoStatus(id: string, newStatus: TodoStatus): void {
-    const currentTodos = this._todos.getValue();
-    const updatedTodos = currentTodos.map(todo =>
-      todo.id === id ? { ...todo, status: newStatus } : todo
-    );
-    this._todos.next(updatedTodos);
-  }
-
   addTodo(title: string, description: string) {
     const newTodo: Todo = {
       id: uuid(),
@@ -53,12 +44,10 @@ export class TodosService {
   }
 
   updateTodo(updatedTodo: Todo): void {
-  const currentTodos = this._todos.getValue();
-  const updatedTodos = currentTodos.map(todo =>
-    todo.id === updatedTodo.id ? { ...updatedTodo } : todo
-  );
-  this._todos.next(updatedTodos);
-}
-
-
+    const currentTodos = this._todos.getValue();
+    const updatedTodos = currentTodos.map(todo =>
+      todo.id === updatedTodo.id ? { ...updatedTodo } : todo
+    );
+    this._todos.next(updatedTodos);
+  }
 }
