@@ -18,6 +18,7 @@
           <app-todo-status [todo]="selectedTodoToChangeStatus()!" [cancelTodo]="clearSelectedTodoToChangeStatus" />
         }
       </p>
+      <button [routerLink]="['/edit-todo', todo.id]">Edit</button>
       <hr />
     </div>
   }

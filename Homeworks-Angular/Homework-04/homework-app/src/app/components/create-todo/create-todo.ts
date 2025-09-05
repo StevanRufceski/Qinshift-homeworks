@@ -9,11 +9,12 @@ import { Todo, TodoStatus } from '../../types/todo.type';
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { TodosService } from '../../services/todos-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-todo',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './create-todo.html',
   styleUrl: './create-todo.scss',
 })
@@ -25,19 +26,20 @@ export class CreateTodoComponent {
   constructor(
     private todosService: TodosService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    this.todoStatusOptions = Object.entries(TodoStatus).map(([key, value]) => ({
-      key,
-      value: value as TodoStatus,
+  ngOnInit(): void {
+    this.todoStatusOptions = Object.values(TodoStatus).map(value => ({
+      key: value.toUpperCase(),
+      value: value as TodoStatus
     }));
+
 
     this.myForm = new FormGroup(
       {
-        title: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-        description: new FormControl ('', [Validators.required, Validators.minLength(10)]),
-        status: new FormControl (TodoStatus.PENDING, Validators.required),
+        title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+        description: new FormControl('', [Validators.required, Validators.minLength(10)]),
+        status: new FormControl(TodoStatus.PENDING, Validators.required),
       },
       {
         updateOn: 'change',

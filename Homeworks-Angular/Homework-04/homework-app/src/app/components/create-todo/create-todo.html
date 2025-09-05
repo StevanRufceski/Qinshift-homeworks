@@ -1,46 +1,41 @@
 <form class="form-card" [formGroup]="myForm" (ngSubmit)="onHandleSubmit()">
-    <input class="title" type="text" name="title" id="" placeholder="Enter title" formControlName="title" />
-    <br>
+    <h2>Create Todo</h2>
+    <label>
+        Title:
+        <input type="text" formControlName="title" class="title" placeholder="Enter title" />
+    </label>
+    <span *ngIf="getErrorMessage('title', 'required')">
+        {{ getErrorMessage('title', 'required') }}
+    </span>
+    <span *ngIf="getErrorMessage('title', 'minlength', 3)">
+        {{ getErrorMessage('title', 'minlength', 3) }}
+    </span>
+    <span *ngIf="getErrorMessage('title', 'maxlength', 50)">
+        {{ getErrorMessage('title', 'maxlength', 50) }}
+    </span>
 
-    @if(getErrorMessage('title', 'required')){
-    <span>
-        {{ getErrorMessage("title", "required") }}
+    <label>
+        Description:
+        <textarea formControlName="description" class="description" placeholder="Enter description"></textarea>
+    </label>
+    <span *ngIf="getErrorMessage('description', 'required')">
+        {{ getErrorMessage('description', 'required') }}
     </span>
-    } @if(getErrorMessage('title', 'minlength', 3)){
-    <span>
-        {{ getErrorMessage("title", "minlength", 3) }}
+    <span *ngIf="getErrorMessage('description', 'minlength', 10)">
+        {{ getErrorMessage('description', 'minlength', 10) }}
     </span>
-    } @if(getErrorMessage('title', 'maxlength', 50)){
-    <span>
-        {{ getErrorMessage("title", "maxlength", 50) }}
-    </span>
-    }
-    <br>
-    <textarea class="description" name="description" id="" placeholder="Enter description"
-        formControlName="description"></textarea>
-    <br>
-    @if(getErrorMessage('description', 'required')){
-    <span>
-        {{ getErrorMessage("description", "required") }}
-    </span>
-    } @if(getErrorMessage('description', 'minlength', 10)){
-    <span>
-        {{ getErrorMessage("description", "minlength", 10) }}
-    </span>
-    }
-    <br>
-    <select name="status" formControlName="status">
-        <option value="" disabled>Select a status</option>
-        <option *ngFor="let option of todoStatusOptions" [value]="option.value">
-            {{ option.value }}
-        </option>
-    </select>
-    <br>
-    @if (getErrorMessage('status', 'required')) {
-    <span>{{ getErrorMessage('status', 'required') }}</span>
-    }
 
-    <br>
+    <label>
+        Status:
+        <select formControlName="status">
+            <option *ngFor="let option of todoStatusOptions" [value]="option.value">
+                {{ option.key }}
+            </option>
+        </select>
+    </label>
+    <span *ngIf="getErrorMessage('status', 'required')">
+        {{ getErrorMessage('status', 'required') }}
+    </span>
 
-    <button [disabled]="myForm.invalid">Submit</button>
+    <button type="submit" [disabled]="myForm.invalid">Submit</button>
 </form>

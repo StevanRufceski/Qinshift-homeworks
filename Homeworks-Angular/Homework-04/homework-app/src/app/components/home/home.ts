@@ -4,11 +4,12 @@ import { Todo } from '../../types/todo.type';
 import { DeleteTodoComponent } from '../delete-todo/delete-todo';
 import { TodoStatusComponent } from '../todo-status/todo-status';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule],
+  imports: [DeleteTodoComponent, TodoStatusComponent, CommonModule, RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
