@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateProductDto, Product } from '../models/product.interface';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { Product, CreateProductDto } from '../models/product.interface';
 import { ProductsApiService } from './products-api.service';
 
 export interface ProductState {
@@ -10,9 +9,7 @@ export interface ProductState {
   error: string | null;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ProductsStateService {
   private readonly initialState: ProductState = {
     products: [],
@@ -20,76 +17,84 @@ export class ProductsStateService {
     error: null,
   };
 
-  constructor(private readonly productApiService: ProductsApiService) {}
-
   private stateSubject = new BehaviorSubject<ProductState>(this.initialState);
-
-  // Observables
   private state$ = this.stateSubject.asObservable();
+
   products$ = this.state$.pipe(map((state) => state.products));
   loading$ = this.state$.pipe(map((state) => state.loading));
   error$ = this.state$.pipe(map((state) => state.error));
 
+  constructor(private readonly productApiService: ProductsApiService) {}
+
   private updateState(partial: Partial<ProductState>) {
-    const currentState = this.stateSubject.value;
-    this.stateSubject.next({ ...currentState, ...partial });
+    const current = this.stateSubject.value;
+    this.stateSubject.next({ ...current, ...partial });
   }
 
   loadProducts() {
     this.updateState({ loading: true });
 
     this.productApiService.getAllProducts().subscribe({
-      next: (data) => {
-        console.log(data);
-
-        this.updateState({
-          products: data,
-          loading: false,
-        });
-      },
-
-      error: (error) => {
-        this.updateState({
-          loading: false,
-          error: 'Failed to load products.',
-        });
-      },
+      next: (data) => this.updateState({ products: data, loading: false }),
+      error: () => this.updateState({ loading: false, error: 'Failed to load products' }),
     });
   }
 
   createProduct(productData: CreateProductDto) {
     this.updateState({ loading: true });
 
-    const requestBodyWithId = {
-      ...productData,
-      id: Date.now(),
-    };
+    const requestBodyWithId = { ...productData, id: Date.now() };
 
     this.productApiService.createProduct(requestBodyWithId).subscribe({
       next: (newProduct) => {
-        const currentState = this.stateSubject.value;
-        this.updateState({
-          products: [...currentState.products, newProduct],
-          loading: false,
-        });
+        const current = this.stateSubject.value.products;
+        this.updateState({ products: [...current, newProduct], loading: false });
       },
-
-      error: (error) => {
-        this.updateState({
-          loading: false,
-          error: 'Failed to create product',
-        });
-      },
+      error: () => this.updateState({ loading: false, error: 'Failed to create product' }),
     });
   }
 
   getProduct(id: number): Observable<Product | undefined> {
-    const currentProducts = this.stateSubject.value.products;
-    // TODO: Maybe fetch that product with that id
-    const existingProduct = currentProducts.find(
-      (product) => product.id === id
-    );
+    const local = this.stateSubject.value.products.find(p => p.id === id);
+    if (local) return of(local);
 
-    return of(existingProduct);
+    return this.productApiService.getProductById(id).pipe(
+      map((product) => {
+        if (product) {
+          const updatedProducts = [...this.stateSubject.value.products, product];
+          this.updateState({ products: updatedProducts });
+        }
+        return product;
+      })
+    );
+  }
+
+  updateProduct(id: number, updatedProduct: Product): Observable<Product> {
+    this.updateState({ loading: true });
+
+    return this.productApiService.updateProduct(id, updatedProduct).pipe(
+      map((updated) => {
+        const updatedList = this.stateSubject.value.products.map((p) =>
+          p.id === id ? updated : p
+        );
+        this.updateState({ products: updatedList, loading: false });
+        return updated;
+      })
+    );
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    this.updateState({ loading: true });
+
+    return this.productApiService.deleteProduct(id).pipe(
+      map(() => {
+        const remaining = this.stateSubject.value.products.filter(p => p.id !== id);
+        this.updateState({ products: remaining, loading: false });
+      })
+    );
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.productApiService.getCategories();
   }
 }

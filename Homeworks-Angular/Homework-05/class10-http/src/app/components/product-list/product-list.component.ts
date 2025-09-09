@@ -27,14 +27,18 @@ export class ProductListComponent {
     this.router.navigate(['/products', id]);
   }
 
-  onDeleteProduct(id: number, event: Event) {
-    console.log(event);
-    event.preventDefault();
-    event.stopPropagation();
-    if (confirm('Are you sure that you wanna delete this product?')) {
-      // TODO: Implement delete product
-    }
+onDeleteProduct(id: number, event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (confirm('Are you sure you want to delete this product?')) {
+    this.productStateService.deleteProduct(id).subscribe({
+      next: () => console.log('Product deleted'),
+      error: (err) => console.error('Failed to delete product', err),
+    });
   }
+}
+
 
   onEditProduct(id: number, event: Event) {
     event.preventDefault();

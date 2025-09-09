@@ -1,13 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { CreateProductDto, Product } from '../../models/product.interface';
-import { ProductsStateService } from '../../services/products-state.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, signal, inject } from "@angular/core";
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Product, CreateProductDto } from "../../models/product.interface";
+import { ProductsStateService } from "../../services/products-state.service";
 
 @Component({
   selector: 'app-product-form',
@@ -16,17 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent {
-  // TODO: Fetch categories and do not hardcode them.
-  // https://fakestoreapi.com/products/categories
-  categories = [
-    'electronics',
-    'jewelery',
-    "men's clothing",
-    "women's clothing",
-  ];
-
+  categories = signal<string[]>([]);
   isEditMode = signal(false);
-
   productForm: FormGroup;
 
   private fb = inject(FormBuilder);
@@ -36,63 +22,60 @@ export class ProductFormComponent {
 
   ngOnInit() {
     this.initForm();
+    this.loadCategories();
 
     const productId = this.activatedRoute.snapshot.paramMap.get('id');
-
-    console.log(productId);
     if (productId) {
       this.isEditMode.set(true);
       this.loadProductForEdit(+productId);
-    } else {
-      this.isEditMode.set(false);
     }
+  }
+
+  private loadCategories() {
+    this.productStateService.getCategories().subscribe({
+      next: (cats) => this.categories.set(cats),
+      error: (err) => console.error('Failed to load categories', err),
+    });
   }
 
   private loadProductForEdit(id: number) {
     this.productStateService.getProduct(id).subscribe({
       next: (product) => {
-        console.log('am i here 1', product); // undefined because the products are not yet fetched
-        if (!product) return;
-        console.log('am i here 2');
+        if (!product) {
+          alert('Product not found');
+          this.router.navigate(['/']);
+          return;
+        }
         this.preloadFormValues(product);
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        alert('Failed to load product');
+        this.router.navigate(['/']);
       },
     });
   }
 
   private preloadFormValues(product: Product) {
-    if (this.productForm) {
-      this.productForm.patchValue({
-        title: product.title,
-        price: product.price,
-        description: product.description,
-        category: product.category,
-        imageUrl: product.image,
-      });
-    }
+    this.productForm.patchValue({
+      title: product.title,
+      price: product.price,
+      description: product.description,
+      category: product.category,
+      imageUrl: product.image,
+    });
   }
 
   private initForm() {
-    // = new FormGroup()
     this.productForm = this.fb.group({
-      title: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(40),
-          Validators.minLength(2),
-        ],
-      ],
-      price: [0, Validators.min(0.1)],
+      title: ['', [Validators.required, Validators.maxLength(40), Validators.minLength(2)]],
+      price: [0, [Validators.required, Validators.min(0.1)]],  // <-- Add Validators.required here
       description: ['', [Validators.required, Validators.maxLength(100)]],
       category: ['', Validators.required],
       imageUrl: ['', Validators.required],
     });
   }
 
-  // TODO: Make onSubmit reusable, meaning if we are in editMode invoke updateProduct, otherwise create the product
+
   onSubmit() {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
@@ -100,25 +83,32 @@ export class ProductFormComponent {
     }
 
     const formValues = this.productForm.value;
-
-    console.log(formValues);
-
-    const createProductDto: CreateProductDto = {
+    const dto: CreateProductDto = {
       title: formValues.title,
       description: formValues.description,
-      image: formValues.image,
+      image: formValues.imageUrl,
       category: formValues.category,
       price: +formValues.price,
     };
 
-    this.productStateService.createProduct(createProductDto);
-
-    setTimeout(() => {
-      this.router.navigate(['/']);
-    }, 500);
+    if (this.isEditMode()) {
+      const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
+      this.productStateService.updateProduct(id, {
+        id, ...dto,
+        rating: {
+          rate: 0,
+          count: 0
+        }
+      }).subscribe({
+        next: () => this.router.navigate(['/']),
+        error: (err) => console.error('Update failed', err),
+      });
+    } else {
+      this.productStateService.createProduct(dto);
+      setTimeout(() => this.router.navigate(['/']), 500);
+    }
   }
 
-  // TODO: Handle error messages
   onCancel() {
     this.router.navigate(['/']);
   }
