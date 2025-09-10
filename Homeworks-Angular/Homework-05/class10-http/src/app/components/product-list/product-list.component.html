@@ -1,9 +1,17 @@
 <section class="products-list">
-  @if(products().length === 0){
+
+  <div class="products-list__actions">
+    <input class="search-input" type="text" placeholder="Search products..." [ngModel]="searchTerm()"
+      (ngModelChange)="searchTerm.set($event)" class="search-input" />
+    <button class="add-button" (click)="navigateToAddProduct()">Add new product</button>
+  </div>
+
+
+  @if (filteredProducts().length === 0) {
   <div>No products found</div>
-  }@else {
+  } @else {
   <div class="product-grid">
-    @for (product of products(); track product.id) {
+    @for (product of filteredProducts(); track product.id) {
     <div class="product-card" (click)="onSelectProduct(product.id)">
       <img [src]="product.image" [alt]="product.title" class="product-image" />
 
@@ -13,12 +21,8 @@
         <p class="product-category">{{ product.category }}</p>
 
         <div class="product-actions">
-          <button type="button" (click)="onEditProduct(product.id, $event)">
-            Edit
-          </button>
-          <button type="button" (click)="onDeleteProduct(product.id, $event)">
-            Delete
-          </button>
+          <button type="button" (click)="onEditProduct(product.id, $event)">Edit</button>
+          <button type="button" (click)="onDeleteProduct(product.id, $event)">Delete</button>
         </div>
       </div>
     </div>

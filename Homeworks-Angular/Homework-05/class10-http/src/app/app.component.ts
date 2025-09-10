@@ -24,7 +24,4 @@ export class AppComponent {
     this.loading$ = this.productStateService.loading$;
   }
 
-  navigateToAddProduct() {
-    this.router.navigate(['/products/new']);
-  }
 }
