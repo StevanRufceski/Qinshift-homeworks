@@ -1,1 +1,0 @@
-SELECT * FROm genres ORDER BY name;

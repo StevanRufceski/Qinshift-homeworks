@@ -1,7 +1,0 @@
-table, tr, th, td{
-    border: solid 1px black;
-}
-table {
-    display: none;
-    width: fit-content;
-}

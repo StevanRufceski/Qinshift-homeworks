@@ -1,6 +1,0 @@
-<div>
-    <p>{{ taskItem().id }} - {{ taskItem().title }} - {{ taskItem().description }} - {{ taskItem().isCompleted ? "Completed" : "Pending" }}
-        <!-- for completing tasks -->
-        <button (click)="onToggle()">{{ taskItem().isCompleted ? 'Revert' : 'Complete' }}</button>
-    </p>
-</div>
