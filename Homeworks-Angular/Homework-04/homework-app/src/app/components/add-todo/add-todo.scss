@@ -1,0 +1,74 @@
+$form-font: 'Segoe UI', sans-serif;
+$form-border: 1px solid #ccc;
+$form-radius: 6px;
+$form-focus-color: #38393b;
+$form-padding: 10px 14px;
+$margin-bottom: 16px;
+$font-size: 16px;
+$inputs-width: 100%;
+$inputs-box-sizing: border-box;
+$inputs-transition: border 0.2s ease-in-out;
+
+.form-card {
+  width: 600px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: $form-font;
+
+  label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    font-family: $form-font;
+  }
+
+  input {
+    box-sizing: $inputs-box-sizing;
+    width: $inputs-width;
+    padding: $form-padding;
+    border: $form-border;
+    border-radius: $form-radius;
+    font-size: $font-size;
+    transition: $inputs-transition;
+    margin-bottom: $margin-bottom;
+    font-family: $form-font;
+
+    &[type='text']:focus {
+      border-color: $form-focus-color;
+      outline: none;
+    }
+  }
+
+  .description {
+    box-sizing: $inputs-box-sizing;
+    width: $inputs-width;
+    padding: $form-padding;
+    border: $form-border;
+    border-radius: $form-radius;
+    font-size: $font-size;
+    transition: $inputs-transition;
+    margin-bottom: $margin-bottom;
+    height: 180px;
+    font-family: $form-font;
+
+    &:focus {
+      border-color: $form-focus-color;
+      outline: none;
+    }
+  }
+
+  button {
+    margin-right: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-family: $form-font;
+
+    &:hover {
+      background-color: #c1c6d2;
+    }
+  }
+}

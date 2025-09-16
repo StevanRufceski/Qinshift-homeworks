@@ -1,0 +1,43 @@
+$padding: 16px;
+
+.home-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: $padding;
+  font-family: 'Segoe UI', sans-serif;
+
+
+  .home-div {
+    border: 1px solid #ccc;
+    padding: $padding;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+
+    button {
+      margin-right: 10px;
+      margin-right: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+
+
+      &:hover {
+        background-color: #c1c6d2;
+      }
+    }
+
+    &.status-completed {
+      background-color: #86ea9d;
+    }
+
+    &.status-pending {
+      background-color: #f5e38c;
+    }
+
+    &.status-in-progress {
+      background-color: #93abe7;
+    }
+  }
+}

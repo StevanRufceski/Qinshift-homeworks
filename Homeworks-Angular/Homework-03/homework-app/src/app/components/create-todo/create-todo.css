@@ -1,0 +1,64 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+textarea.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.form-card {
+    width: 600px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.title,
+.description {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.2s ease-in-out;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.description {
+    height: 180px;
+}
+
+.description:focus {
+    border-color: #38393b;
+    outline: none;
+}
+
+.form-card input[type="text"]:focus {
+    border-color: #38393b;
+    outline: none;
+}
+
+.form-card button {
+    margin-right: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.form-card button:hover {
+    background-color: #c1c6d2;
+}
+
+span {
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: red;
+}

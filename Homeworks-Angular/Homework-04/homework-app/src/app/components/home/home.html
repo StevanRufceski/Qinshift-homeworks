@@ -1,0 +1,17 @@
+@if (selectedTodoToDelete() != null) {
+<app-delete-todo [todo]="selectedTodoToDelete()!" [cancelTodo]="clearSelectedTodoToDelete" />
+}
+
+<div class="home-container">
+  @for (todo of todos(); track todo.id) {
+    <!-- <div class="home-div"> -->
+    <div class="home-div" [ngClass]="getStatusClass(todo.status)">
+      <h2>{{ todo.id }} - {{ todo.title }}</h2>
+      <p>{{ todo.description }}</p>
+      <p>Status: {{ todo.status }}</p>
+      <button [routerLink]="['/edit-todo', todo.id]">Edit</button>
+      <button (click)="selectTodoToDelete(todo)">Delete</button>
+      <hr />
+    </div>
+  }
+</div>

@@ -1,0 +1,47 @@
+.letterBtn {
+    margin: 10px;
+    height: 30px;
+    width: 30px;
+}
+:disabled:hover{
+    cursor: default;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+body {
+    text-align: center;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #751818;
+    border: 1px solid #ccc;
+    color: #ccc;
+}
+.letterSpace, .firedLetter{
+    display: inline;
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+}
+#startBtn, #hintBtn{
+    background-color: aqua;
+    color: #751818;
+    justify-content: center;
+}
+#startBtn{
+    display: none;
+}
+#popupDiv {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    height: 500px;
+    width: 100%;
+    background-color: white;
+}
+
+
+
+
